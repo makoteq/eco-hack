@@ -1,0 +1,40 @@
+import React, { useEffect, useRef } from "react";
+import OSM from "ol/Map";
+import View from "ol/View";
+import TileLayer from "ol/layer/Tile";
+import XYZ from "ol/source/XYZ";
+import styles from "./index.module.scss";
+
+export const Map = (props) => {
+    const mapRef = useRef(null);
+
+    useEffect(() => {
+        const view = new View({
+            center: props.center ?? [0, 0],
+            zoom: props.zoom ?? 3,
+        });
+        const layer = new TileLayer({
+            source: new XYZ({
+                url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            }),
+        });
+        const el = mapRef.current;
+        new OSM({
+            target: el,
+            view: view,
+            layers: [layer],
+        });
+        view.on("change:center", () => {
+            if (typeof props.onCenterChange === "function") props.onCenterChange(view.getCenter());
+        });
+        return () => {
+            el.innerHTML = "";
+        };
+    }, [props]);
+
+    return (
+        <div style={{ width: props.width, height: props.height }} className={styles.container}>
+            <div ref={mapRef} className={styles.map}></div>
+        </div>
+    );
+};
