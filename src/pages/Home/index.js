@@ -1,15 +1,32 @@
+import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import styles from "./index.module.scss";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants";
 
 export const Home = () => {
-    const data =[{"name":"test1"},{"name":"test2"}];
+    const [events, updateEvents] = useState([]);
+
+    axios
+        .get(`${BACKEND_URL}/api/getEvents`)
+        .then((res) => {
+            if (res.status !== 200) throw new Error(`Request failed with code ${res.status}: ${res.statusText}`);
+            updateEvents(res.data);
+        })
+        .catch((e) => {
+            console.error(`Failed to fetch events. ${e}`);
+        });
+
     return (
         <div className={styles.con}>
             <Stack gap={1}>
-            {data.map(function(d, idx){
-         return (<div key={idx} className={styles.item}>{d.name}</div>)
-       })}
-                
+                {events.map((e, i) => {
+                    return (
+                        <div key={i} className={styles.item}>
+                            {e.mess}
+                        </div>
+                    );
+                })}
             </Stack>
         </div>
     );
