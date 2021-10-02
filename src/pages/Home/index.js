@@ -30,7 +30,9 @@ export const Home = () => {
                         </div>
                     );
                 })}
+                  <p className={styles.more}>więcej</p>
             </Stack>
+          
         </div>
     );
 };

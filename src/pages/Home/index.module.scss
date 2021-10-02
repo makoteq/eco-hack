@@ -9,12 +9,16 @@
     padding-top:10px;
 }
 .con {
-    width: 90%;
-    height: 80%;
+    width: 70vw;
+    max-width: 500px;
     margin: 0 auto;
     font-family: "Poppins", sans-serif;
 }
 .location {
     font-weight: bold;
     font-size: 1.7em;
+}
+.more{
+    color: #5873FF;
+    text-align: right;
 }
