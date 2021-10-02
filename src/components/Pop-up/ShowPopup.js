@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 import { useState, useEffect } from "react";
 
-function Popupv2() {
+function ShowPopup() {
   const [timedPopup, setTimedPopup] = useState(false);
 
   useEffect(() => {
@@ -27,4 +27,4 @@ function Popupv2() {
   );
 }
 
-export default Popupv2;
+export default ShowPopup;
