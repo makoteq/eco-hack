@@ -7,6 +7,7 @@ import {
   } from "react-router-dom";
   import Stack from 'react-bootstrap/Stack'
   import Container from 'react-bootstrap/Container'
+  import Logo from "./components/Logo/index.js";
   export default function App() {
     return (
       <Router>
@@ -40,7 +41,7 @@ import {
   }
   
   function About() {
-    return <h2>About</h2>;
+    return <Logo/>;
   }
   
   function Users() {
