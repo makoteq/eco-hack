@@ -15,7 +15,6 @@ export const CreateEvent = () => {
 
     return (
         <div className={styles.formContainer}>
-            <h1 className={styles.title}>Tworzenie nowego wydarzenia</h1>
             <Formik
                 initialValues={{
                     type: 1,
@@ -31,6 +30,7 @@ export const CreateEvent = () => {
             >
                 <Form>
                     <Stack gap={2}>
+                        <h1 className={styles.title}>Tworzenie nowego wydarzenia</h1>
                         <Field as="select" name="type">
                             <option value={1}>Typ 1</option>
                             <option value={2}>Typ 2</option>
