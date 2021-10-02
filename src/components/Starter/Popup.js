@@ -12,10 +12,10 @@ function Popup(props) {
           <br />
           <br />
           <br />
-          <br />
           <button className="close-btn" onClick={() => props.setTrigger(false)}>
             Zaczynamy!
           </button>
+          <br />
           <br />
           <br />
         </div>

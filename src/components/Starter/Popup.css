@@ -43,8 +43,16 @@ main {
   background-color: white;
 }
 
-/*.close-btn {
-}*/
+.close-btn {
+  border-radius: 12px;
+  padding: 10px 24px;
+  border: none;
+  background-color: #cecece;
+  transition-duration: 0.4s;
+}
+.close-btn:hover {
+  background-color: hsl(122, 58%, 71%); /* Green */
+}
 
 .popup-inner .Animation {
   text-align: left;
