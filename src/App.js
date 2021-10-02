@@ -3,10 +3,12 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Users } from "./pages/Users";
 import { NotFound } from "./pages/NotFound";
+import Logo from "./components/Logo";
 
 export const App = () => {
     return (
         <Router>
+            <Logo />
             <Switch>
                 <Route exact path="/about" component={About} />
                 <Route exact path="/users" component={Users} />
