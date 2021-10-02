@@ -1,23 +1,15 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
 import styles from "./index.module.scss";
-import { BACKEND_URL } from "../../constants";
+import { Link } from "react-router-dom";
+import { getEvents } from "../../utils/api/getEvents";
 
 export const Home = () => {
     const [events, updateEvents] = useState([]);
 
     useEffect(() => {
-        axios
-            .get(`${BACKEND_URL}/api/getEvents`)
-            .then((res) => {
-                if (res.status !== 200) throw new Error(`Request failed with code ${res.status}: ${res.statusText}`);
-                updateEvents(res.data);
-            })
-            .catch((e) => {
-                console.error(`Failed to fetch events. ${e}`);
-            });
+        getEvents().then((e) => updateEvents(e));
     }, []);
 
     return (
@@ -26,7 +18,9 @@ export const Home = () => {
                 {events.map((e, i) => {
                     return <EventPreview name={e.name} date={e.date} key={i} />;
                 })}
-                <p className={styles.more}>więcej</p>
+                <Link to="/create" className={styles.more}>
+                    utwórz wydarzenie
+                </Link>
             </Stack>
         </div>
     );
