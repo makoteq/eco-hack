@@ -5,21 +5,12 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import Card from 'react-bootstrap/Card'
+  import Stack from 'react-bootstrap/Stack'
+  import Container from 'react-bootstrap/Container'
   export default function App() {
     return (
       <Router>
         <div>
-        <Card style={{ width: '18rem' }}>
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-
-  </Card.Body>
-</Card>
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
@@ -39,7 +30,13 @@ import {
   }
   
   function Home() {
-    return <h2>Home</h2>;
+    return (
+    <div className={styles.con}>      <Stack gap={1}>
+      <div className={styles.item}>First item</div>
+      <div className={styles.item}>Second item</div>
+      <div className={styles.item}>Third item</div>
+    </Stack></div>
+    );
   }
   
   function About() {
