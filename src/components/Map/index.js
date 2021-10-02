@@ -4,7 +4,19 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 import styles from "./index.module.scss";
+import marker from "../../assets/location_marker.svg";
+import "./MapControls.scss";
 
+/**
+ *
+ * @param {*} props
+ * @param props.center - initial position
+ * @param props.zoom - initial zoom
+ * @param props.onCenterChange - function called on each map move
+ * @param props.width - map width
+ * @param props.height - map height
+ * @param props.blockInteraction - whether interacting with this map should be possible
+ */
 export const Map = (props) => {
     const mapRef = useRef(null);
 
@@ -34,7 +46,8 @@ export const Map = (props) => {
 
     return (
         <div style={{ width: props.width, height: props.height }} className={styles.container}>
-            <div ref={mapRef} className={styles.map}></div>
+            {props.showMarker && <img alt="" src={marker} className={styles.marker}></img>}
+            <div ref={mapRef} className={`${styles.map} ${props.blockInteraction ? styles.block : ""}`}></div>
         </div>
     );
 };

@@ -1,0 +1,17 @@
+@import "../../index.scss";
+
+.ol-zoom-in,
+.ol-zoom-out {
+    padding: 3px;
+    margin: 2px;
+    background: $bggray;
+    border: none;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.ol-rotate {
+    display: none !important;
+}
