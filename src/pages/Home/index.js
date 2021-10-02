@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { Stack } from "react-bootstrap";
+import { EventPreview } from "../../components/EventPreview";
 import styles from "./index.module.scss";
-import axios from "axios";
 import { BACKEND_URL } from "../../constants";
 
 export const Home = () => {
@@ -23,16 +24,10 @@ export const Home = () => {
         <div className={styles.con}>
             <Stack gap={1}>
                 {events.map((e, i) => {
-                    return (
-                        <div key={i} className={styles.item}>
-                           <span className={styles.location}>{e.name}</span> <br></br>
-                           <span>{e.date}</span> 
-                        </div>
-                    );
+                    return <EventPreview name={e.name} date={e.date} key={i} />;
                 })}
-                  <p className={styles.more}>więcej</p>
+                <p className={styles.more}>więcej</p>
             </Stack>
-          
         </div>
     );
 };
