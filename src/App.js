@@ -8,10 +8,12 @@ import {
   import Stack from 'react-bootstrap/Stack'
   import Container from 'react-bootstrap/Container'
   import Logo from "./components/Logo/index.js";
+  import Hand from "./components/AnimatedHand/Hand.js";
   export default function App() {
     return (
       <Router>
         <div>
+          <Logo/>
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
@@ -32,7 +34,7 @@ import {
   
   function Home() {
     return (
-    <div className={styles.con}>      <Stack gap={1}>
+    <div className={styles.con}><Stack gap={1}>
       <div className={styles.item}>First item</div>
       <div className={styles.item}>Second item</div>
       <div className={styles.item}>Third item</div>
@@ -41,7 +43,7 @@ import {
   }
   
   function About() {
-    return <Logo/>;
+    return <Hand/>;
   }
   
   function Users() {
