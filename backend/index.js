@@ -1,6 +1,7 @@
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
+
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 3000
 const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
 const events = require("./models/events");
@@ -23,5 +24,5 @@ app.get("/api/getEvents", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+  console.log(`Example app listening at http://localhost:${port}`)
+})
