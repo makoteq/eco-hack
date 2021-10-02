@@ -25,7 +25,8 @@ export const Home = () => {
                 {events.map((e, i) => {
                     return (
                         <div key={i} className={styles.item}>
-                            {e.mess}
+                           <span className={styles.location}>{e.name}</span> <br></br>
+                           <span>{e.date}</span> 
                         </div>
                     );
                 })}

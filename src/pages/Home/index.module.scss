@@ -1,12 +1,20 @@
 .item {
     border: 1px solid black;
+    border-radius: 15px;
     width: 70vw;
     max-width: 500px;
+    height:10vh;
     margin: 0 auto;
+    padding-left:25px;
+    padding-top:10px;
 }
 .con {
-    text-align: center;
     width: 90%;
+    height: 80%;
     margin: 0 auto;
     font-family: "Poppins", sans-serif;
+}
+.location {
+    font-weight: bold;
+    font-size: 1.7em;
 }
