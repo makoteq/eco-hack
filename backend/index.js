@@ -11,9 +11,9 @@ mongoose
   })
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
-app.get("/api", async (req, res) => {
+app.get("/api/getEvents", async (req, res) => {
   try {
-    const event = await events.find({ mess: "one" });
+    const event = await events.find();
     if (!event) throw Error("something went wrong");
     console.log(event);
     res.status(200).json(event);
