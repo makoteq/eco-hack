@@ -11,3 +11,12 @@
     color: #5873ff;
     text-align: right;
 }
+
+.sortDropdown {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .label {
+        margin: 0;
+    }
+}
