@@ -10,7 +10,7 @@ export const EventPreview = (props) => {
   useEffect(() => {
     getPlace([props.lon,props.lat]).then((value) => {
       console.log(value);
-      setLocation(`${value.city ? value.city : value.county},${value.neighbourhood ? value.neighbourhood : ``} `  );
+      setLocation(`${value.city ? value.city : value.county},${value.neighbourhood ?? ``} `  );
     });
       console.log(props.time);
     switch (props.type) {
