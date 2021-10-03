@@ -2,9 +2,10 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
 import styles from "./index.module.scss";
-import { Link } from "react-router-dom";
 import { BIcon } from "../../components/BIcon";
 import { EVENT_CONTEXT } from "../../constants";
+import { useHistory } from "react-router";
+import Button from "@restart/ui/esm/Button";
 
 export const Home = () => {
     const events = useContext(EVENT_CONTEXT);
@@ -36,6 +37,8 @@ export const Home = () => {
         });
     }, [list]);
 
+    const history = useHistory();
+
     return (
         <div className={styles.con}>
             <Stack gap={1}>
@@ -43,7 +46,7 @@ export const Home = () => {
                     <p className={styles.label}>
                         <BIcon icon="sort-down-alt" /> Sortuj według
                     </p>
-                    <select ref={sortDropdown}>
+                    <select ref={sortDropdown} className={styles.sortDropdownMenu}>
                         <option value="event-date:ascending">Data wydarzenia: rosnąco</option>
                         <option value="event-date:descending">Data wydarzenia: malejąco</option>
                         <option value="creation-date:ascending">Data utworzenia: rosnąco</option>
@@ -53,13 +56,19 @@ export const Home = () => {
                         <option value="distance:ascending">Odległość: rosnąco</option>
                         <option value="distance:descending">Odległość: malejąco</option>
                     </select>
+                    <Button
+                        onClick={() => {
+                            history.push("/create");
+                        }}
+                        className={styles.create}
+                    >
+                        <BIcon icon="plus" />
+                        Utwórz wydarzenie
+                    </Button>
                 </Stack>
                 {list.map((e, i) => {
                     return <EventPreview name={e.name} date={e.date} id={e._id} key={i} />;
                 })}
-                <Link to="/create" className={styles.more}>
-                    utwórz wydarzenie
-                </Link>
             </Stack>
         </div>
     );

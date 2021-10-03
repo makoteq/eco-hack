@@ -7,9 +7,11 @@
     font-family: "Poppins", sans-serif;
 }
 
-.more {
-    color: #5873ff;
-    text-align: right;
+.create {
+    padding: 7px;
+    &:hover {
+        background-color: $accent;
+    }
 }
 
 .sortDropdown {
@@ -19,4 +21,12 @@
     .label {
         margin: 0;
     }
+}
+
+.sortDropdownMenu {
+    max-width: 20vw;
+}
+
+.label {
+    text-align: right;
 }
