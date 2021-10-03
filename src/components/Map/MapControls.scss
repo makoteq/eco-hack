@@ -3,6 +3,7 @@
 .ol-zoom-in,
 .ol-zoom-out {
     padding: 3px;
+    padding-top: 0;
     margin: 2px;
     background: $bggray;
     border: none;
@@ -10,6 +11,11 @@
     font-size: 1.2rem;
     width: 2rem;
     height: 2rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    &:hover {
+        background-color: $bghover;
+    }
 }
 
 .ol-rotate {

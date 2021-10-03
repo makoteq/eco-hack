@@ -1,6 +1,8 @@
+@import "../../index.scss";
+
 .con {
-    width: 70vw;
-    max-width: 500px;
+    width: $defaultWidth;
+    max-width: $maxWidth;
     margin: 0 auto;
     font-family: "Poppins", sans-serif;
 }

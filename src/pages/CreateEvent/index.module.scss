@@ -6,7 +6,8 @@
 }
 
 .formContainer {
-    max-width: 70%;
+    width: $defaultWidth;
+    max-width: $maxWidth;
     margin: auto;
 }
 
