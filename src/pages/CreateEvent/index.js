@@ -17,7 +17,7 @@ export const CreateEvent = () => {
         <div className={styles.formContainer}>
             <Formik
                 initialValues={{
-                    type: 1,
+                    type: 0,
                     name: "",
                     description: "",
                     phoneNumber: "",
@@ -32,10 +32,13 @@ export const CreateEvent = () => {
                     <Stack gap={2}>
                         <h1 className={styles.title}>Tworzenie nowego wydarzenia</h1>
                         <Field as="select" name="type">
-                            <option value={1}>Typ 1</option>
-                            <option value={2}>Typ 2</option>
-                            <option value={3}>Typ 3</option>
-                            <option value={4}>Typ 4</option>
+                            <option hidden disabled selected value={0}>
+                                Wybierz typ wydarzenia
+                            </option>
+                            <option value={1}>Sprzątanie świata</option>
+                            <option value={2}>Sadzenie drzew</option>
+                            <option value={3}>Happening/meeting</option>
+                            <option value={4}>Inne</option>
                         </Field>
                         <Field type="text" name="name" placeholder="Nazwa wydarzenia" />
                         <Field type="text" name="description" placeholder="Opis wydarzenia" />
