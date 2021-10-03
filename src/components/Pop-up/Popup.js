@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import Hand from "./AnimatedHand/Hand";
+import Hand from "./AnimatedHand";
 
 export default function Popup(props) {
   return props.trigger ? (

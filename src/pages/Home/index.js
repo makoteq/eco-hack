@@ -3,6 +3,7 @@ import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
 import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
+import  HoldingPlant  from "../../components/Pop-up/AnimatedHand";
 import { EVENT_CONTEXT } from "../../constants";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
@@ -41,6 +42,7 @@ export const Home = () => {
 
     return (
         <div className={styles.con}>
+          { /* <div className={styles.hand}> <HoldingPlant/></div>*/}
             <Stack gap={1}>
                 <Stack gap={2} direction={"horizontal"} className={styles.sortDropdown}>
                     <p className={styles.label}>
