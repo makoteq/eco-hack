@@ -18,7 +18,19 @@ export class APIClient {
         return events.find((e) => e.id === id) ?? null;
     }
     async createEvent(data) {
-        return;
-        // Not finished
+        //Check types
+        if (typeof data !== "object") throw new TypeError("Data object is required");
+        if (typeof data.name !== "string") throw new TypeError("Name property must be a string");
+        if (typeof data.type !== "number" || data.type === 0) throw new TypeError("Invalid event type");
+        if (typeof data.time !== "number") throw new TypeError("Invalid date format");
+        if (typeof data.created !== "object") throw new TypeError("created property must be present");
+        if (typeof data.created.time !== "number") throw new TypeError("Invalid created date format");
+        if (typeof data.lat !== "number") throw new TypeError("Invalid lattitude");
+        if (typeof data.lon !== "number") throw new TypeError("Invalid longtitude");
+
+        //Make POST request
+        const rq = await axios.post(`${this.#dbUrl}/api/createEvent`, data);
+        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        return rq;
     }
 }
