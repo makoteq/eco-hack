@@ -21,6 +21,7 @@ export class APIClient {
         //Check types
         if (typeof data !== "object") throw new TypeError("Data object is required");
         if (typeof data.name !== "string") throw new TypeError("Name property must be a string");
+        if (typeof data.type !== "number" || data.type === 0) throw new TypeError("Invalid event type");
         if (typeof data.time !== "number") throw new TypeError("Invalid date format");
         if (typeof data.created !== "object") throw new TypeError("created property must be present");
         if (typeof data.created.time !== "number") throw new TypeError("Invalid created date format");
