@@ -2,18 +2,17 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import React, { useState, useEffect } from "react";
-import {orangeColor} from "../../index.scss";
+
 export const EventPreview = (props) => {
   const [label, setLabel] = useState("");
   const [color, setColor] = useState("white");
   useEffect(() => {
-    console.log(orangeColor) //nie działa :((
     switch (props.type) {
       case 1:
-        setColor("green");
+        setColor("#53d188");
         break;
       case 2:
-        setColor("red");
+        setColor("#FBBEBE");
         break;
       default:
     }

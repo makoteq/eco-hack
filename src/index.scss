@@ -8,15 +8,6 @@ $bg: #ffffff;
 $orange:#FBBEBE;
 $defaultWidth: 90vw;
 $maxWidth: 650px;
-$theme-colors: (
-  'orangeColor': #FBBEBE,
-  'anotherColor': #FFF,
-);
-:export {
-    @each $key, $value in $theme-colors {
-      #{unquote($key)}: $value;
-    }
-  }
 
 * {
     margin: 0;
