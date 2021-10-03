@@ -3,7 +3,7 @@ import { Window } from "../components/Window";
 import { window as windowStyles } from "../components/Window/index.module.scss";
 
 const closeWindow = (resolver) => {
-    return () => {
+    return (value) => {
         document.getElementsByClassName(windowStyles)[0].animate(
             [
                 { transform: "scale(1)", opacity: 1 },
@@ -17,7 +17,7 @@ const closeWindow = (resolver) => {
         setTimeout(() => {
             ReactDOM.unmountComponentAtNode(document.getElementById("popup-container"));
             document.getElementById("popup-container").style.display = "none";
-            resolver();
+            resolver(value);
         }, 300);
     };
 };
