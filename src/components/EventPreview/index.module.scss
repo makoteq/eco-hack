@@ -11,9 +11,17 @@
     margin: 3px auto;
     padding: 10px 25px;
     height: 120px;
+    transition: border-color 0.2s ease;
+    &:hover {
+        border-color: $accent;
+    }
+    &:hover .location {
+        color: $accent;
+    }
 }
 
 .location {
     font-weight: bold;
     font-size: 1.7em;
+    transition: color 0.2s ease;
 }
