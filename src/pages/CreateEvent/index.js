@@ -7,6 +7,7 @@ import { fromLonLat, toLonLat } from "ol/proj";
 import { useHistory } from "react-router";
 import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
 import styles from "./index.module.scss";
+import { spawnPopup } from "../../utils/spawnPopup";
 
 export const CreateEvent = () => {
     const context = useContext(EVENT_CONTEXT);
@@ -23,7 +24,18 @@ export const CreateEvent = () => {
             date: "0",
             description: "",
         },
-        onSubmit: (data) => {
+        onSubmit: async (data) => {
+            if (data.type === 0) {
+                await spawnPopup((close) => {
+                    return (
+                        <>
+                            <h1>Nie podałeś typu wydarzenia</h1>
+                            <button onClick={close}>Zamknij</button>
+                        </>
+                    );
+                });
+                return;
+            }
             const cords = toLonLat([center[0], center[1]]);
             const rqObj = {
                 name: data.name,
