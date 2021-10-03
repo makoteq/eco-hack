@@ -34,10 +34,14 @@ const  getTime = (time) =>{
       <div className={styles.item}>
         <span className={styles.location}>{props.name ?? "Event name"}</span>{" "}
         <br></br>
+        <div className="d-flex justify-content-between align-items-center ">
         <span className={styles.time}>
           <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
-        </span>{" "}
-        <br></br>
+        </span>
+        <span className={styles.time}>
+          <BIcon icon="geo-alt-fill" /> miejsce, miasto ,kraj
+        </span>
+        </div>
         <div className="d-flex justify-content-between align-items-center ">
         <div style={{ background: color }} className={styles.block}>
           {label}
