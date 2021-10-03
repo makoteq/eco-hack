@@ -5,6 +5,11 @@ const port = process.env.PORT || 3000;
 const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
 const events = require("./models/events");
+const bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 app.use(
   cors({
     origin: "*",
@@ -28,7 +33,15 @@ app.get("/api/getEvents", async (req, res) => {
   }
 });
 app.post("/api/createEvent", (req, res) => {
-  events.create({ name: "wydarzenie",type:2,time:Date.now(),created:{time:Date.now()}}, (err) => {
+    let data = {
+        name:req.body.name,
+        type:req.body.type,
+        time:req.body.time,
+        created:{time:Date.now()},
+        lat:req.body.lat,
+        lot:req.body.lat
+    }
+  events.create(data, (err) => {
     if (err) return res.status(400).json({ msg: err });
     // saved!
     res.status(200).json("ok");
