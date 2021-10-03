@@ -7,7 +7,7 @@ export const EventPreview = (props) => {
   const [label, setLabel] = useState("");
   const [color, setColor] = useState("white");
   useEffect(() => {
-      console.log(props)
+      console.log(props.time);
     switch (props.type) {
       case 1:
         setColor("#53d188");
@@ -21,11 +21,12 @@ export const EventPreview = (props) => {
     }
 }, [label,color,props.type]);
 const  getDate = (time) =>{
-    var date = new Date(time);
-    return date.toLocaleDateString()
+    let date = new Date(time);
+    return date.toLocaleDateString(navigator.language)
 }
 const  getTime = (time) =>{
-    var date = new Date(time);
+    let date = new Date(time);
+    console.log(navigator.language)
     return date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
 }
   return (
@@ -34,7 +35,7 @@ const  getTime = (time) =>{
         <span className={styles.location}>{props.name ?? "Event name"}</span>{" "}
         <br></br>
         <span className={styles.time}>
-          <BIcon icon="calendar" /> {props.date ?? ""}
+          <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
         </span>{" "}
         <br></br>
         <div className="d-flex justify-content-between align-items-center ">

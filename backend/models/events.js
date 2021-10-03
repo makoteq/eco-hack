@@ -17,7 +17,7 @@ const eventSchema = new schema({
     required: false,
   },
   time: {
-    type: String,
+    type: Number,
     required: true,
   },
   lat: {
