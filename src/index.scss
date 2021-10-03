@@ -16,3 +16,14 @@ $maxWidth: 700px;
 body {
     font-family: "Poppins", sans-serif;
 }
+
+button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px !important;
+    background-color: $bggray;
+    transition: background-color 0.3s ease;
+    &:hover {
+        background-color: darken($bggray, 5);
+    }
+}
