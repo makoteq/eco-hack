@@ -67,7 +67,7 @@ export const Home = () => {
                     </Button>
                 </Stack>
                 {list.map((e, i) => {
-                    return <EventPreview name={e.name} date={e.date} id={e._id} key={i} />;
+                    return <EventPreview name={e.name} type={e.type} date={e.date} id={e._id} key={i} />;
                 })}
             </Stack>
         </div>
