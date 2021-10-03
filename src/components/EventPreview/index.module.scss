@@ -10,11 +10,12 @@
     font-size: 0.8em;
 }
 .item {
+    text-align: center;
     border: 1px solid black;
     border-radius: 15px;
     margin: 3px auto;
     padding: 10px 25px;
-    height: 120px;
+    min-height: 120px;
     transition: border-color 0.2s ease;
     &:hover {
         border-color: $accent;
@@ -31,13 +32,14 @@
 }
 .time{
     font-size: 1.1em;
+    text-align: center;
 }
 .block{
     text-align: center;
     font-weight: 400;
-    font-size: 0.9em;
-    max-width:150px;
+    font-size: 1.2vh;
+    min-width:100px;
     padding:5px;
-    height:30px;
+    max-height:30px;
     border-radius:7px;
 }
