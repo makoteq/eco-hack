@@ -6,6 +6,12 @@ const eventSchema = new schema({
     type: String,
     required: false,
   },
+  created:{
+  time:{
+      type:Number,
+      required: false,
+    },
+  },
   type: {
     type: Number,
     required: false,
