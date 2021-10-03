@@ -5,9 +5,7 @@ function ShowPopup() {
   const [timedPopup, setTimedPopup] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
       setTimedPopup(true);
-    }, 3000);
   }, []);
 
   return (

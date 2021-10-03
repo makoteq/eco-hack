@@ -19,7 +19,7 @@ export const EventPreview = (props) => {
         break;
       default:
     }
-}, [label,color,props.type]);
+}, [label,color,props.type,props.time]);
 const  getDate = (time) =>{
     let date = new Date(time);
     return date.toLocaleDateString(navigator.language)
