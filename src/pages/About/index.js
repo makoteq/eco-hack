@@ -1,6 +1,6 @@
 // import styles from "./index.module.scss";
 import Logo from "../../components/Logo";
-import  Popup from "../../components/Pop-up";
+import ShowPopup from "../../components/Pop-up/ShowPopup";
 export const About = () => {
-    return <Popup/>;
+  return <ShowPopup />;
 };

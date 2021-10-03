@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 import Hand from "./AnimatedHand/Hand";
 
-export default  function Popup(props) {
+export default function Popup(props) {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
