@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import React, { useState, useEffect } from "react";
-
+import {getPlace} from "../../utils/map/getPlace"
 export const EventPreview = (props) => {
   const [label, setLabel] = useState("");
   const [color, setColor] = useState("white");
+  const [location, setLocation] = useState("");
   useEffect(() => {
+    getPlace([props.lon,props.lat]).then((value) => {
+      console.log(value);
+      setLocation(`${value.city ? value.city : value.county},${value.neighbourhood ? value.neighbourhood : ``} `  );
+    });
       console.log(props.time);
     switch (props.type) {
       case 1:
@@ -29,6 +34,14 @@ const  getTime = (time) =>{
     console.log(navigator.language)
     return date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
 }
+const getEventPlace = (cords)=>{
+  getPlace(cords).then((value) => {
+    console.log(value.country);
+   return value.country
+  });
+  
+
+}
   return (
     <Link to={`/event/${props.id}`} className={styles.link}>
       <div className={styles.item}>
@@ -39,7 +52,7 @@ const  getTime = (time) =>{
           <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
         </span>
         <span className={styles.time}>
-          <BIcon icon="geo-alt-fill" /> miejsce, miasto ,kraj
+          <BIcon icon="geo-alt-fill" /> {location}
         </span>
         </div>
         <div className="d-flex justify-content-between align-items-center ">
