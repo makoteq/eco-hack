@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 
 export const EventPreview = (props) => {
     return (
-        <Link to="/" className={styles.link}>
+        <Link to={`/event/${props.id}`} className={styles.link}>
             <div className={styles.item}>
                 <span className={styles.location}>{props.name ?? "Event name"}</span> <br></br>
                 <span>

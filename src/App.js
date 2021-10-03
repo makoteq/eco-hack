@@ -35,7 +35,7 @@ export const App = (props) => {
                     {Array.isArray(props.events) &&
                         props.events.map((e) => {
                             return (
-                                <Route key={e._id} exact path={`/${e._id}`}>
+                                <Route key={e._id} exact path={`/event/${e._id}`}>
                                     <Event id={e._id}></Event>
                                 </Route>
                             );
