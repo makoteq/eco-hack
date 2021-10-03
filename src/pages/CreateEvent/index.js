@@ -9,8 +9,8 @@ import styles from "./index.module.scss";
 
 export const CreateEvent = () => {
     const mapSearchBox = useRef(null);
-    let [center, setCenter] = useState([0, 0]);
-    const [zoom, setZoom] = useState(2);
+    let [center, setCenter] = useState(fromLonLat([18.667, 54.35]));
+    const [zoom, setZoom] = useState(15);
     const history = useHistory();
 
     return (
