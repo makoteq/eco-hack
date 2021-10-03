@@ -32,7 +32,7 @@ export const CreateEvent = () => {
                     <Stack gap={2}>
                         <h1 className={styles.title}>Tworzenie nowego wydarzenia</h1>
                         <Field as="select" name="type">
-                            <option hidden disabled selected value={0}>
+                            <option hidden disabled value={0}>
                                 Wybierz typ wydarzenia
                             </option>
                             <option value={1}>Sprzątanie świata</option>
