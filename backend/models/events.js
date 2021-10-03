@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const eventSchema = new schema({
   name: {
     type: String,
-    required: false,
+    required: true,
   },
   created:{
   time:{
@@ -16,21 +16,17 @@ const eventSchema = new schema({
     type: Number,
     required: false,
   },
-  date: {
-    type: String,
-    required: false,
-  },
   time: {
     type: Number,
-    required: false,
+    required: true,
   },
   lat: {
     type: Number,
-    required: false,
+    required: true,
   },
   lon: {
     type: Number,
-    required: false,
+    required: true,
   },
 });
 

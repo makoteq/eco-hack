@@ -1,8 +1,8 @@
 import React from "react";
-import "./Popup.css";
+import "./index.scss";
 import Hand from "./AnimatedHand/Hand";
 
-function Popup(props) {
+export default  function Popup(props) {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
@@ -28,5 +28,3 @@ function Popup(props) {
     ""
   );
 }
-
-export default Popup;
