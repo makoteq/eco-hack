@@ -1,14 +1,15 @@
 import { useFormik } from "formik";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { Map } from "../../components/Map";
 import { searchLocation } from "../../utils/map/searchLocation";
 import { fromLonLat, toLonLat } from "ol/proj";
 import { useHistory } from "react-router";
-import { API_CLIENT } from "../../constants";
+import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
 import styles from "./index.module.scss";
 
 export const CreateEvent = () => {
+    const context = useContext(EVENT_CONTEXT);
     const mapSearchBox = useRef(null);
     const mapSearchBtn = useRef(null);
     let [center, setCenter] = useState(fromLonLat([18.667, 54.35]));
@@ -32,8 +33,12 @@ export const CreateEvent = () => {
                 lat: cords[1],
                 time: new Date(`${data.date} ${data.time}`).getTime(),
             };
-            API_CLIENT.createEvent(rqObj);
-            history.push("/");
+            API_CLIENT.createEvent(rqObj).then(() => {
+                API_CLIENT.getEvents().then((r) => {
+                    context.updateEvents(r);
+                    history.push("/");
+                });
+            });
         },
     });
 
