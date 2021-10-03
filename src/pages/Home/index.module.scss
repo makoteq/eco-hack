@@ -4,6 +4,7 @@
     width: $defaultWidth;
     max-width: $maxWidth;
     margin: 0 auto;
+    margin-top:2vh;
     font-family: "Poppins", sans-serif;
 }
 
@@ -29,5 +30,5 @@
 }
 
 .label {
-    text-align: right;
+    text-align: center;
 }
