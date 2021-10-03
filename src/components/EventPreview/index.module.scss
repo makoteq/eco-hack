@@ -4,7 +4,11 @@
     text-decoration: none;
     color: black !important;
 }
-
+.created{
+}
+.createdSpan{
+    font-size: 0.8em;
+}
 .item {
     border: 1px solid black;
     border-radius: 15px;
@@ -30,10 +34,10 @@
 }
 .block{
     text-align: center;
-    font-weight: 600;
-    font-size: 0.8em;
-    max-width:120px;
-    padding:3px;
-    height:25px;
+    font-weight: 400;
+    font-size: 0.9em;
+    max-width:150px;
+    padding:5px;
+    height:30px;
     border-radius:10px;
 }

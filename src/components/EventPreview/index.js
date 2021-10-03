@@ -7,16 +7,27 @@ export const EventPreview = (props) => {
   const [label, setLabel] = useState("");
   const [color, setColor] = useState("white");
   useEffect(() => {
+      console.log(props)
     switch (props.type) {
       case 1:
         setColor("#53d188");
+        setLabel("sadzenie drzew")
         break;
       case 2:
         setColor("#FBBEBE");
+        setLabel("zbieranie śmieci")
         break;
       default:
     }
 }, [label,color,props.type]);
+const  getDate = (time) =>{
+    var date = new Date(time);
+    return date.toLocaleDateString()
+}
+const  getTime = (time) =>{
+    var date = new Date(time);
+    return date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+}
   return (
     <Link to={`/event/${props.id}`} className={styles.link}>
       <div className={styles.item}>
@@ -26,10 +37,13 @@ export const EventPreview = (props) => {
           <BIcon icon="calendar" /> {props.date ?? ""}
         </span>{" "}
         <br></br>
+        <div className="d-flex justify-content-between align-items-center ">
         <div style={{ background: color }} className={styles.block}>
           {label}
         </div>
-      </div>
+        <span  className={styles.createdSpan}>utworzone {getDate(props.createdTime)} o godzinie {getTime(props.createdTime)}</span>
+        </div>
+        </div>
     </Link>
   );
 };
