@@ -44,6 +44,7 @@ app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
         type: req.body.type,
+        address: req.body.address,
         time: req.body.time,
         created: { time: Date.now() },
         lat: req.body.lat,
