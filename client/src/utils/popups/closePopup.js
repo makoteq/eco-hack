@@ -1,14 +1,16 @@
 import ReactDOM from "react-dom";
 import { window as windowClass } from "../../components/Window/index.module.scss";
-import { POPUP_CONTAINER, POPUP_ANIMATION_DURATION, POPUP_BACKGROUND } from "../../constants";
 
 export const closePopup = () => {
+    const container = document.getElementById("popup-container");
     const window = document.getElementsByClassName(windowClass)[0];
+    const animationDuration = 300;
+    const backgroundColor = "rgba(0,0,0,0.75)";
 
-    if (POPUP_CONTAINER?.innerHTML !== "") {
-        POPUP_CONTAINER.animate([{ backgroundColor: POPUP_BACKGROUND }, { backgroundColor: "rgba(0,0,0,0)" }], {
+    if (container?.innerHTML !== "") {
+        container.animate([{ backgroundColor: backgroundColor }, { backgroundColor: "rgba(0,0,0,0)" }], {
             easing: "ease",
-            duration: POPUP_ANIMATION_DURATION,
+            duration: animationDuration,
             fill: "both",
         });
         window?.animate(
@@ -18,12 +20,12 @@ export const closePopup = () => {
             ],
             {
                 easing: "ease",
-                duration: POPUP_ANIMATION_DURATION,
+                duration: animationDuration,
             }
         );
         setTimeout(() => {
-            ReactDOM.unmountComponentAtNode(POPUP_CONTAINER);
-            POPUP_CONTAINER.style.display = "none";
-        }, POPUP_ANIMATION_DURATION);
+            ReactDOM.unmountComponentAtNode(container);
+            container.style.display = "none";
+        }, animationDuration);
     }
 };
