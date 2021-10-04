@@ -16,10 +16,8 @@
     margin: 3px auto;
     padding: 10px 25px;
     min-height: 120px;
-    &:hover .location {
-        background: -webkit-linear-gradient($gray, $accent);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    &:hover {
+        border-color: $accent;
     }
 }
 
@@ -27,6 +25,11 @@
     font-weight: bold;
     font-size: 1.7em;
     transition: color 0.2s ease;
+    &:hover  {
+        background: -webkit-linear-gradient($gray, $accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
 .time{
     font-size: 1.1em;
