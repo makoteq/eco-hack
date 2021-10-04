@@ -23,10 +23,22 @@ export const CreateEvent = () => {
             description: "",
         },
         onSubmit: async (data) => {
+            const date = new Date(`${data.date} ${data.time}`).getTime();
+
+            // Validate data
             if (data.type === 0) {
                 await spawnError("Nie podano typu wydarzenia");
                 return;
             }
+            if (!data.name) {
+                await spawnError("Wprowadź nazwę wydarzenia");
+                return;
+            }
+            if (date < Date.now() || data.date === "0" || data.time === "0") {
+                await spawnError("Podana data jest nieprawidłowa");
+                return;
+            }
+
             const rqObj = {
                 name: data.name,
                 type: parseInt(data.type),
@@ -34,7 +46,7 @@ export const CreateEvent = () => {
                 lon: mapPos?.[0] ?? null,
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
-                time: new Date(`${data.date} ${data.time}`).getTime(),
+                time: date,
             };
             API_CLIENT.createEvent(rqObj)
                 .then(() => {
@@ -68,6 +80,18 @@ export const CreateEvent = () => {
                     <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder=" Opis wydarzenia" />
                     <Stack gap={2} direction="horizontal">
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
+                        {locationText !== "Brak lokalizacji" && (
+                            <button
+                                className={styles.redButton}
+                                type="button"
+                                onClick={() => {
+                                    setMapPos(null);
+                                    setLocationText("Brak lokalizacji");
+                                }}
+                            >
+                                <BIcon icon="x" />
+                            </button>
+                        )}
                         <button
                             type="button"
                             style={{ width: "30%" }}
@@ -93,29 +117,20 @@ export const CreateEvent = () => {
                                             />
                                         );
                                     },
-                                    { width: "70vw", backgroundColor: "#DDDDDD" }
+                                    { width: "70vw", backgroundColor: "#CCCCCC" }
                                 );
                             }}
                         >
                             Wybierz lokalizację
                         </button>
-                        {locationText !== "Brak lokalizacji" && (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setMapPos(null);
-                                    setLocationText("Brak lokalizacji");
-                                }}
-                            >
-                                <BIcon icon="x" />
-                            </button>
-                        )}
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
                         <input onChange={formik.handleChange} type="time" id="time" style={{ width: "50%" }} />
                     </Stack>
-                    <button type="submit">Utwórz wydarzenie</button>
+                    <button type="submit" className={"greenButton"}>
+                        Utwórz wydarzenie
+                    </button>
                 </Stack>
             </form>
         </div>
