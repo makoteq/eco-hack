@@ -80,7 +80,7 @@ export const CreateEvent = () => {
                                                 onSubmit={(pos) => {
                                                     getPlace(pos).then((r) => {
                                                         const data = r
-                                                            ? [r.road, r.house_number, r.city, r.country, r.postcode].filter((r) => r !== undefined)
+                                                            ? [r.road, r.house_number, r.county, r.neighbourhood, r.country, r.postcode].filter((r) => r !== undefined)
                                                             : ["Nieznana lokalizacja"];
                                                         setLocationText(data.join(", "));
                                                     });
