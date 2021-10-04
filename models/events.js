@@ -6,6 +6,10 @@ const eventSchema = new schema({
     type: String,
     required: true,
   },
+  adress: {
+    type: String,
+    required: false,
+  },
   created:{
   time:{
       type:Number,
@@ -22,11 +26,11 @@ const eventSchema = new schema({
   },
   lat: {
     type: Number,
-    required: true,
+    required: false,
   },
   lon: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 
