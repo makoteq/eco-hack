@@ -5,7 +5,8 @@ import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
 import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
 import styles from "./index.module.scss";
-import { spawnPopup } from "../../utils/spawnPopup";
+import { spawnPopup } from "../../utils/popups/spawnPopup";
+import { spawnError } from "../../utils/popups/spawnError";
 import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
 
@@ -23,14 +24,7 @@ export const CreateEvent = () => {
         },
         onSubmit: async (data) => {
             if (data.type === 0) {
-                await spawnPopup((close) => {
-                    return (
-                        <>
-                            <h1>Nie podałeś typu wydarzenia</h1>
-                            <button onClick={close}>Zamknij</button>
-                        </>
-                    );
-                });
+                await spawnError("Nie podano typu wydarzenia");
                 return;
             }
             const rqObj = {
@@ -49,16 +43,8 @@ export const CreateEvent = () => {
                         history.push("/");
                     });
                 })
-                .catch((e) => {
-                    spawnPopup((close) => {
-                        return (
-                            <>
-                                <h1>Coś poszło nie tak</h1>
-                                <h2>{e.toString()}</h2>
-                                <button onClick={close}>Zamknij</button>
-                            </>
-                        );
-                    });
+                .catch(async (e) => {
+                    await spawnError(e.toString());
                 });
         },
     });
