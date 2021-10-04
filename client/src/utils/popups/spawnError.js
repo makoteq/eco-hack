@@ -9,7 +9,7 @@ export const spawnError = async (details) => {
                 <div className={styles.icon}>
                     <BIcon icon="x-circle-fill" />
                 </div>
-                <h1>Coś poszło nie tak</h1>
+                <h2>Coś poszło nie tak</h2>
                 <p>{details}</p>
                 <button onClick={close}>Zamknij</button>
             </div>
