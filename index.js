@@ -55,7 +55,9 @@ app.post("/api/createEvent", (req, res) => {
         res.status(200).json("ok");
     });
 });
-
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+})
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
