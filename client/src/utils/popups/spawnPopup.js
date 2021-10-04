@@ -1,18 +1,15 @@
 import ReactDOM from "react-dom";
 import { Window } from "../../components/Window";
 import { window as windowClass } from "../../components/Window/index.module.scss";
+import { POPUP_CONTAINER, POPUP_ANIMATION_DURATION, POPUP_BACKGROUND } from "../../constants";
 
 export const spawnPopup = async (elements, windowStyles) => {
-    const container = document.getElementById("popup-container");
-    const backgroundColor = "rgba(0,0,0,0.75)";
-    const animationDuration = 300;
-
     return new Promise((resolve, reject) => {
         const closeWindow = (value) => {
-            if (container.innerHTML === "") reject("Popup closed using closePopup function");
-            container.animate([{ backgroundColor: backgroundColor }, { backgroundColor: "rgba(0,0,0,0)" }], {
+            if (POPUP_CONTAINER.innerHTML === "") reject("Popup closed using closePopup function");
+            POPUP_CONTAINER.animate([{ backgroundColor: POPUP_BACKGROUND }, { backgroundColor: "rgba(0,0,0,0)" }], {
                 easing: "ease",
-                duration: animationDuration,
+                duration: POPUP_ANIMATION_DURATION,
                 fill: "both",
             });
             window.animate(
@@ -22,26 +19,26 @@ export const spawnPopup = async (elements, windowStyles) => {
                 ],
                 {
                     easing: "ease",
-                    duration: animationDuration,
+                    duration: POPUP_ANIMATION_DURATION,
                 }
             );
             setTimeout(() => {
-                ReactDOM.unmountComponentAtNode(container);
-                container.style.display = "none";
+                ReactDOM.unmountComponentAtNode(POPUP_CONTAINER);
+                POPUP_CONTAINER.style.display = "none";
                 resolve(value ?? null);
-            }, animationDuration);
+            }, POPUP_ANIMATION_DURATION);
         };
 
-        if (container.innerHTML !== "") {
+        if (POPUP_CONTAINER.innerHTML !== "") {
             reject("Another popup is active");
         }
 
-        container.style.display = "block";
-        ReactDOM.render(<Window style={windowStyles ?? {}}>{elements(closeWindow)}</Window>, container);
+        POPUP_CONTAINER.style.display = "block";
+        ReactDOM.render(<Window style={windowStyles ?? {}}>{elements(closeWindow)}</Window>, POPUP_CONTAINER);
         const window = document.getElementsByClassName(windowClass)[0];
-        container.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: backgroundColor }], {
+        POPUP_CONTAINER.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: POPUP_BACKGROUND }], {
             easing: "ease",
-            duration: animationDuration,
+            duration: POPUP_ANIMATION_DURATION,
             fill: "both",
         });
         window.animate(
@@ -51,7 +48,7 @@ export const spawnPopup = async (elements, windowStyles) => {
             ],
             {
                 easing: "ease",
-                duration: animationDuration,
+                duration: POPUP_ANIMATION_DURATION,
             }
         );
     });
