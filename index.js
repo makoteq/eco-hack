@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require('path');
 const port = process.env.PORT || 5000;
 const { MONGO_URI } = require("./config");
 const mongoose = require("mongoose");
@@ -13,6 +14,7 @@ app.use(
         extended: true,
     })
 );
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(
     cors({
         origin: "*",
