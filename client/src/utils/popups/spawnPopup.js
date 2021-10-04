@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
-import { Window } from "../components/Window";
-import { window as windowClass } from "../components/Window/index.module.scss";
+import { Window } from "../../components/Window";
+import { window as windowClass } from "../../components/Window/index.module.scss";
 
 export const spawnPopup = async (elements, windowStyles) => {
     const container = document.getElementById("popup-container");
