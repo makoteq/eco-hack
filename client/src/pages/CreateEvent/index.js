@@ -1,21 +1,18 @@
 import { useFormik } from "formik";
-import { useRef, useState, useContext } from "react";
+import { useContext, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { Map } from "../../components/Map";
-import { searchLocation } from "../../utils/map/searchLocation";
-import { fromLonLat, toLonLat } from "ol/proj";
+import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
 import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
 import styles from "./index.module.scss";
 import { spawnPopup } from "../../utils/spawnPopup";
+import { getPlace } from "../../utils/map/getPlace";
+import { MapPopup } from "./MapPopup";
 
 export const CreateEvent = () => {
     const context = useContext(EVENT_CONTEXT);
-    const mapSearchBox = useRef(null);
-    const mapSearchBtn = useRef(null);
-    let [center, setCenter] = useState(fromLonLat([18.667, 54.35]));
-    const [zoom, setZoom] = useState(15);
     const history = useHistory();
+    const [locationText, setLocationText] = useState("Brak lokalizacji");
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -36,23 +33,36 @@ export const CreateEvent = () => {
                 });
                 return;
             }
-            const cords = toLonLat([center[0], center[1]]);
             const rqObj = {
                 name: data.name,
                 type: parseInt(data.type),
                 description: data.description,
-                lon: cords[0],
-                lat: cords[1],
+                lon: mapPos?.[0] ?? null,
+                lat: mapPos?.[1] ?? null,
+                address: locationText,
                 time: new Date(`${data.date} ${data.time}`).getTime(),
             };
-            API_CLIENT.createEvent(rqObj).then(() => {
-                API_CLIENT.getEvents().then((r) => {
-                    context.updateEvents(r);
-                    history.push("/");
+            API_CLIENT.createEvent(rqObj)
+                .then(() => {
+                    API_CLIENT.getEvents().then((r) => {
+                        context.updateEvents(r);
+                        history.push("/");
+                    });
+                })
+                .catch((e) => {
+                    spawnPopup((close) => {
+                        return (
+                            <>
+                                <h1>Coś poszło nie tak</h1>
+                                <h2>{e.toString()}</h2>
+                                <button onClick={close}>Zamknij</button>
+                            </>
+                        );
+                    });
                 });
-            });
         },
     });
+    const [mapPos, setMapPos] = useState(null);
 
     return (
         <div className={styles.formContainer}>
@@ -70,45 +80,48 @@ export const CreateEvent = () => {
                     </select>
                     <input onChange={formik.handleChange} type="text" id="name" placeholder="Nazwa wydarzenia" />
                     <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder="Opis wydarzenia" />
-                    <Stack gap={2}>
-                        <Stack direction="horizontal" gap={2}>
-                            <input
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                        e.preventDefault();
-                                        mapSearchBtn.current.click();
-                                    }
-                                }}
-                                placeholder="Wyszukaj adres..."
-                                style={{ width: "95%" }}
-                                type="text"
-                                ref={mapSearchBox}
-                            />
+                    <Stack gap={2} direction="horizontal">
+                        <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
+                        <button
+                            type="button"
+                            style={{ width: "30%" }}
+                            onClick={() => {
+                                spawnPopup(
+                                    (close) => {
+                                        return (
+                                            <MapPopup
+                                                startingPos={mapPos === null ? [18.667, 54.35] : mapPos}
+                                                onSubmit={(pos) => {
+                                                    getPlace(pos).then((r) => {
+                                                        const data = [r.road, r.house_number, r.city, r.country, r.postcode].filter((r) => r !== undefined);
+                                                        setLocationText(data.join(", "));
+                                                    });
+                                                    setMapPos(pos);
+                                                    close();
+                                                }}
+                                                onCancel={() => {
+                                                    close();
+                                                }}
+                                            />
+                                        );
+                                    },
+                                    { width: "70vw", backgroundColor: "#DDDDDD" }
+                                );
+                            }}
+                        >
+                            Wybierz lokalizację
+                        </button>
+                        {locationText !== "Brak lokalizacji" && (
                             <button
-                                ref={mapSearchBtn}
                                 type="button"
-                                onClick={async () => {
-                                    const value = mapSearchBox.current.value;
-                                    const results = await searchLocation(value);
-                                    if (results[0]) {
-                                        setCenter(fromLonLat([results[0].lon, results[0].lat]));
-                                        setZoom(18);
-                                    }
+                                onClick={() => {
+                                    setMapPos(null);
+                                    setLocationText("Brak lokalizacji");
                                 }}
                             >
-                                Szukaj
+                                <BIcon icon="x" />
                             </button>
-                        </Stack>
-                        <Map
-                            onCenterChange={(c) => {
-                                center = c;
-                            }}
-                            showMarker={true}
-                            width="100%"
-                            height="500px"
-                            center={center}
-                            zoom={zoom}
-                        ></Map>
+                        )}
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
