@@ -4,7 +4,7 @@
     width: $defaultWidth;
     max-width: $maxWidth;
     margin: 0 auto;
-    margin-top:2vh;
+    margin-top: 2vh;
     font-family: "Poppins", sans-serif;
 }
 
@@ -16,8 +16,8 @@
 }
 
 .sortDropdown {
-    margin:0 auto;
-    margin-bottom:2vh;
+    margin: 0 auto;
+    margin-bottom: 2vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -27,13 +27,13 @@
 }
 
 .sortDropdownMenu {
-    max-width: 20vw;
+    max-width: 15vw;
 }
 
 .label {
     text-align: center;
 }
-.hand{
+.hand {
     position: absolute;
-    left:0;
+    left: 0;
 }

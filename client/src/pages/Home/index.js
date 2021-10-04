@@ -5,12 +5,17 @@ import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
 // import HoldingPlant from "../../components/Pop-up/AnimatedHand";
 import { EVENT_CONTEXT } from "../../constants";
+import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 
 export const Home = () => {
-    const events = useContext(EVENT_CONTEXT);
-    const [list, updateList] = useState(events.events);
+    const context = useContext(EVENT_CONTEXT);
+    const [list, updateList] = useState(
+        context.events.map((e, i) => {
+            return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
+        })
+    );
     const sortDropdown = useRef(null);
 
     useEffect(() => {
@@ -18,25 +23,27 @@ export const Home = () => {
             const value = e.target.value;
             const type = value.split(":")[0];
             const direction = value.split(":")[1];
-            const newOrder = list.sort((a, b) => {
+            const newOrder = context.events.sort((a, b) => {
                 switch (type) {
                     case "event-date":
-                        const aDate = new Date(a.date);
-                        const bDate = new Date(b.date);
-                        return direction === "ascending" ? aDate.getTime() - bDate.getTime() : bDate.getTime() - aDate.getTime();
+                        return direction === "ascending" ? a.time - b.time : b.time - a.time;
                     case "creation-date":
-                        return 0;
+                        return direction === "ascending" ? b.created.time - a.created.time : a.created.time - b.created.time;
                     case "alphabetic":
-                        return direction === "ascending" ? a.name > b.name : a.name < b.name;
+                        return direction === "ascending" ? (a.name > b.name ? -1 : 1) : a.name > b.name ? 1 : -1;
                     case "distance":
                         return 0;
                     default:
                         return 0;
                 }
             });
-            updateList(newOrder);
+            updateList(
+                newOrder.map((e, i) => {
+                    return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
+                })
+            );
         });
-    }, [list]);
+    }, [context.events]);
 
     const history = useHistory();
 
@@ -51,14 +58,14 @@ export const Home = () => {
                         <BIcon icon="sort-down-alt" /> Sortuj według
                     </p>
                     <select ref={sortDropdown} className={styles.sortDropdownMenu}>
-                        <option value="event-date:ascending">Data wydarzenia: rosnąco</option>
-                        <option value="event-date:descending">Data wydarzenia: malejąco</option>
-                        <option value="creation-date:ascending">Data utworzenia: rosnąco</option>
-                        <option value="creation-date:descending">Data utworzenia: malejąco</option>
-                        <option value="alphabetic:ascending">Alfabetycznie: rosnąco</option>
-                        <option value="alphabetic:descending">Alfabetycznie: malejąco</option>
-                        <option value="distance:ascending">Odległość: rosnąco</option>
-                        <option value="distance:descending">Odległość: malejąco</option>
+                        <option value="event-date:ascending">Data wydarzenia: od najwcześniejszych</option>
+                        <option value="event-date:descending">Data wydarzenia: od najpóźniejszych</option>
+                        <option value="creation-date:ascending">Data utworzenia: od najnowszych</option>
+                        <option value="creation-date:descending">Data utworzenia: od najstarszych</option>
+                        <option value="alphabetic:ascending">Alfabetycznie: A-Z</option>
+                        <option value="alphabetic:descending">Alfabetycznie: Z-A</option>
+                        <option value="distance:ascending">Odległość: najbliżej [NIE DZIAŁA]</option>
+                        <option value="distance:descending">Odległość: najdalej [NIE DZIAŁA]</option>
                     </select>
                     <Button
                         onClick={() => {
@@ -70,9 +77,7 @@ export const Home = () => {
                         Utwórz wydarzenie
                     </Button>
                 </Stack>
-                {list.map((e, i) => {
-                    return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
-                })}
+                {list}
             </Stack>
         </div>
     );
