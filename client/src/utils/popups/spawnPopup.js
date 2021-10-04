@@ -12,7 +12,7 @@ export const spawnPopup = async (elements, windowStyles) => {
                 duration: POPUP_ANIMATION_DURATION,
                 fill: "both",
             });
-            window?.animate(
+            window.animate(
                 [
                     { transform: "scale(1)", opacity: 1 },
                     { transform: "scale(0)", opacity: 0 },
@@ -41,7 +41,7 @@ export const spawnPopup = async (elements, windowStyles) => {
             duration: POPUP_ANIMATION_DURATION,
             fill: "both",
         });
-        window?.animate(
+        window.animate(
             [
                 { transform: "scale(0)", opacity: 0 },
                 { transform: "scale(1)", opacity: 1 },
