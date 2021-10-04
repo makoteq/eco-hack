@@ -35,7 +35,7 @@ export const EventPreview = (props) => {
                         <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
                     </span>
                     <span className={styles.time}>
-                        <BIcon icon="geo-alt-fill" /> {props.address}
+                        <BIcon icon="geo-alt-fill" /> {props.address?.split(", ").splice(0, 2).join(", ")}
                     </span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center ">
