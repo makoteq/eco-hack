@@ -1,4 +1,4 @@
-import styles from "./error.module.scss";
+import styles from "./confirm.module.scss";
 import { spawnPopup } from "./spawnPopup";
 import { BIcon } from "../../components/BIcon";
 
@@ -9,7 +9,7 @@ export const spawnConfirm = async (details) => {
                 <div className={styles.icon}>
                     <BIcon icon="question-circle-fill" />
                 </div>
-                <h2>{details}</h2>
+                <h3>{details}</h3>
                 <button className={styles.button} onClick={() => close(true)}>
                     Tak
                 </button>
