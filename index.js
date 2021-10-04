@@ -14,7 +14,7 @@ app.use(
         extended: true,
     })
 );
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(
     cors({
         origin: "*",
@@ -27,6 +27,9 @@ mongoose
     })
     .then(() => console.log("connected"))
     .catch((err) => console.log(err));
+    app.get('/', (req,res) =>{
+        res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    });
 app.get("/api/getEvents", async (req, res) => {
     try {
         const event = await events.find();
