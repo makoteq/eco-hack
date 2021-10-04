@@ -11,7 +11,9 @@ export const spawnError = async (details) => {
                 </div>
                 <h2>Coś poszło nie tak</h2>
                 <p>{details}</p>
-                <button onClick={close}>Zamknij</button>
+                <button className={styles.button} onClick={close}>
+                    Zamknij
+                </button>
             </div>
         );
     });
