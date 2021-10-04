@@ -5,7 +5,7 @@ $gray: #dadada;
 $bggray: #e8e8e8;
 $bghover: darken($bggray, 10);
 $bg: #ffffff;
-$orange:#FBBEBE;
+$orange: #fbbebe;
 $defaultWidth: 90vw;
 $maxWidth: 650px;
 
@@ -26,5 +26,13 @@ button {
     transition: background-color 0.3s ease;
     &:hover {
         background-color: darken($bggray, 5);
+    }
+}
+
+.greenButton {
+    @extend button;
+    background-color: $accent;
+    &:hover {
+        background-color: darken($accent, 10);
     }
 }

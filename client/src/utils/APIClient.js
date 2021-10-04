@@ -23,8 +23,6 @@ export class APIClient {
         if (typeof data.name !== "string") throw new TypeError("Name property must be a string");
         if (typeof data.type !== "number" || data.type === 0) throw new TypeError("Invalid event type");
         if (typeof data.time !== "number") throw new TypeError("Invalid date format");
-        if (typeof data.lat !== "number") throw new TypeError("Invalid lattitude");
-        if (typeof data.lon !== "number") throw new TypeError("Invalid longtitude");
 
         //Make POST request
         const rq = await axios.post(`${this.#dbUrl}/api/createEvent`, data);
