@@ -2,29 +2,56 @@ import ReactDOM from "react-dom";
 import { Window } from "../components/Window";
 import { window as windowStyles } from "../components/Window/index.module.scss";
 
-const closeWindow = (resolver) => {
-    return (value) => {
-        document.getElementsByClassName(windowStyles)[0].animate(
+export const spawnPopup = async (elements) => {
+    const container = document.getElementById("popup-container");
+    const backgroundColor = "rgba(0,0,0,0.75)";
+    const animationDuration = 300;
+
+    return new Promise((resolve, reject) => {
+        const closeWindow = (value) => {
+            container.animate([{ backgroundColor: backgroundColor }, { backgroundColor: "rgba(0,0,0,0)" }], {
+                easing: "ease",
+                duration: animationDuration,
+                fill: "both",
+            });
+            window.animate(
+                [
+                    { transform: "scale(1)", opacity: 1 },
+                    { transform: "scale(0)", opacity: 0 },
+                ],
+                {
+                    easing: "ease",
+                    duration: animationDuration,
+                }
+            );
+            setTimeout(() => {
+                ReactDOM.unmountComponentAtNode(container);
+                container.style.display = "none";
+                resolve(value ?? null);
+            }, animationDuration);
+        };
+
+        if (container.innerHTML !== "") {
+            reject("Another popup is active");
+        }
+
+        container.style.display = "block";
+        ReactDOM.render(<Window>{elements(closeWindow)}</Window>, container);
+        const window = document.getElementsByClassName(windowStyles)[0];
+        container.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: backgroundColor }], {
+            easing: "ease",
+            duration: animationDuration,
+            fill: "both",
+        });
+        window.animate(
             [
-                { transform: "scale(1)", opacity: 1 },
                 { transform: "scale(0)", opacity: 0 },
+                { transform: "scale(1)", opacity: 1 },
             ],
             {
                 easing: "ease",
-                duration: 300,
+                duration: animationDuration,
             }
         );
-        setTimeout(() => {
-            ReactDOM.unmountComponentAtNode(document.getElementById("popup-container"));
-            document.getElementById("popup-container").style.display = "none";
-            resolver(value);
-        }, 300);
-    };
-};
-
-export const spawnPopup = async (elements) => {
-    return new Promise((resolve) => {
-        document.getElementById("popup-container").style.display = "block";
-        ReactDOM.render(<Window>{elements(closeWindow(resolve))}</Window>, document.getElementById("popup-container"));
     });
 };
