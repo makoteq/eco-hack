@@ -16,12 +16,10 @@
     margin: 3px auto;
     padding: 10px 25px;
     min-height: 120px;
-    transition: border-color 0.2s ease;
-    &:hover {
-        border-color: $accent;
-    }
     &:hover .location {
-        color: $accent;
+        background: -webkit-linear-gradient($gray, $accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
 

@@ -54,7 +54,7 @@ export const CreateEvent = () => {
         <div className={styles.formContainer}>
             <form onSubmit={formik.handleSubmit}>
                 <Stack gap={2}>
-                    <h1 className={styles.title}>Tworzenie nowego wydarzenia</h1>
+                    <span className={styles.title}>Tworzenie nowego wydarzenia</span>
                     <select onChange={formik.handleChange} defaultValue={0} id="type">
                         <option hidden disabled value={0}>
                             Wybierz typ wydarzenia
@@ -64,8 +64,8 @@ export const CreateEvent = () => {
                         <option value={3}>Happening/meeting</option>
                         <option value={4}>Inne</option>
                     </select>
-                    <input onChange={formik.handleChange} type="text" id="name" placeholder="Nazwa wydarzenia" />
-                    <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder="Opis wydarzenia" />
+                    <input onChange={formik.handleChange} type="text" id="name" placeholder=" Nazwa wydarzenia" />
+                    <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder=" Opis wydarzenia" />
                     <Stack gap={2} direction="horizontal">
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
                         <button

@@ -1,8 +1,12 @@
 @import "../../index.scss";
 
 .title {
-    color: $accent;
-    text-align: center;
+    background: -webkit-linear-gradient(#fff, $accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    text-align: left;
+    font-size: 1.6em;
+    font-weight: bold;
 }
 
 .formContainer {
