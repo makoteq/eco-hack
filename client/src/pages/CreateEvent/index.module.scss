@@ -17,3 +17,11 @@ select {
     border-radius: 5px;
     border: 1px black solid;
 }
+
+.redButton {
+    background-color: rgb(255, 100, 100);
+    color: #fff;
+    &:hover {
+        background-color: darken(rgb(255, 100, 100), 10);
+    }
+}

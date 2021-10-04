@@ -68,6 +68,18 @@ export const CreateEvent = () => {
                     <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder="Opis wydarzenia" />
                     <Stack gap={2} direction="horizontal">
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
+                        {locationText !== "Brak lokalizacji" && (
+                            <button
+                                className={styles.redButton}
+                                type="button"
+                                onClick={() => {
+                                    setMapPos(null);
+                                    setLocationText("Brak lokalizacji");
+                                }}
+                            >
+                                <BIcon icon="x" />
+                            </button>
+                        )}
                         <button
                             type="button"
                             style={{ width: "30%" }}
@@ -99,17 +111,6 @@ export const CreateEvent = () => {
                         >
                             Wybierz lokalizację
                         </button>
-                        {locationText !== "Brak lokalizacji" && (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setMapPos(null);
-                                    setLocationText("Brak lokalizacji");
-                                }}
-                            >
-                                <BIcon icon="x" />
-                            </button>
-                        )}
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
