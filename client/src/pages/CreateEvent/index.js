@@ -115,7 +115,9 @@ export const CreateEvent = () => {
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
                         <input onChange={formik.handleChange} type="time" id="time" style={{ width: "50%" }} />
                     </Stack>
-                    <button type="submit">Utwórz wydarzenie</button>
+                    <button type="submit" className={"greenButton"}>
+                        Utwórz wydarzenie
+                    </button>
                 </Stack>
             </form>
         </div>
