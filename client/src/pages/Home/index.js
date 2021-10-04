@@ -3,7 +3,7 @@ import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
 import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
-import  HoldingPlant  from "../../components/Pop-up/AnimatedHand";
+import HoldingPlant from "../../components/Pop-up/AnimatedHand";
 import { EVENT_CONTEXT } from "../../constants";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
@@ -42,7 +42,9 @@ export const Home = () => {
 
     return (
         <div className={styles.con}>
-          { /* <div className={styles.hand}> <HoldingPlant/></div>*/}
+            {/* <div className={styles.hand}>
+                <HoldingPlant />
+            </div> */}
             <Stack gap={1}>
                 <Stack gap={2} direction={"horizontal"} className={styles.sortDropdown}>
                     <p className={styles.label}>
@@ -69,7 +71,7 @@ export const Home = () => {
                     </Button>
                 </Stack>
                 {list.map((e, i) => {
-                    return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} key={i} />;
+                    return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
                 })}
             </Stack>
         </div>
