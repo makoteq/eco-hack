@@ -9,6 +9,7 @@ export const spawnPopup = async (elements, windowStyles) => {
 
     return new Promise((resolve, reject) => {
         const closeWindow = (value) => {
+            if (container.innerHTML === "") reject("Popup closed using closePopup function");
             container.animate([{ backgroundColor: backgroundColor }, { backgroundColor: "rgba(0,0,0,0)" }], {
                 easing: "ease",
                 duration: animationDuration,
