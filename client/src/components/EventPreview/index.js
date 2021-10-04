@@ -29,12 +29,12 @@ export const EventPreview = (props) => {
     return (
         <Link to={`/event/${props.id}`} className={styles.link}>
             <div className={styles.item}>
-                <span className={styles.location}>{props.name ?? "Event name"}</span> <br></br>
+                <span className={styles.name}>{props.name ?? "Event name"}</span> <br></br>
                 <div className="d-flex justify-content-between align-items-center ">
                     <span className={styles.time}>
                         <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
                     </span>
-                    <span className={styles.time}>
+                    <span className={styles.location}>
                         <BIcon icon="geo-alt-fill" /> {props.address?.split(", ").splice(0, 2).join(", ")}
                     </span>
                 </div>
