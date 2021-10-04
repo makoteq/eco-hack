@@ -23,10 +23,22 @@ export const CreateEvent = () => {
             description: "",
         },
         onSubmit: async (data) => {
+            const date = new Date(`${data.date} ${data.time}`).getTime();
+
+            // Validate data
             if (data.type === 0) {
                 await spawnError("Nie podano typu wydarzenia");
                 return;
             }
+            if (!data.name) {
+                await spawnError("Wprowadź nazwę wydarzenia");
+                return;
+            }
+            if (date < Date.now() || data.date === "0" || data.time === "0") {
+                await spawnError("Podana data jest nieprawidłowa");
+                return;
+            }
+
             const rqObj = {
                 name: data.name,
                 type: parseInt(data.type),
@@ -34,7 +46,7 @@ export const CreateEvent = () => {
                 lon: mapPos?.[0] ?? null,
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
-                time: new Date(`${data.date} ${data.time}`).getTime(),
+                time: date,
             };
             API_CLIENT.createEvent(rqObj)
                 .then(() => {
