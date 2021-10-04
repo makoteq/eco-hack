@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import { Window } from "../components/Window";
-import { window as windowStyles } from "../components/Window/index.module.scss";
+import { window as windowClass } from "../components/Window/index.module.scss";
 
-export const spawnPopup = async (elements) => {
+export const spawnPopup = async (elements, windowStyles) => {
     const container = document.getElementById("popup-container");
     const backgroundColor = "rgba(0,0,0,0.75)";
     const animationDuration = 300;
@@ -36,8 +36,8 @@ export const spawnPopup = async (elements) => {
         }
 
         container.style.display = "block";
-        ReactDOM.render(<Window>{elements(closeWindow)}</Window>, container);
-        const window = document.getElementsByClassName(windowStyles)[0];
+        ReactDOM.render(<Window style={windowStyles ?? {}}>{elements(closeWindow)}</Window>, container);
+        const window = document.getElementsByClassName(windowClass)[0];
         container.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: backgroundColor }], {
             easing: "ease",
             duration: animationDuration,
