@@ -23,7 +23,8 @@ export const CreateEvent = () => {
             description: "",
         },
         onSubmit: async (data) => {
-            const date = new Date(`${data.date} ${data.time}`).getTime();
+            const date = new Date(`${data.date} ${data.time}`);
+            const currentDate = new Date();
 
             // Validate data
             if (data.type === 0) {
@@ -34,7 +35,7 @@ export const CreateEvent = () => {
                 await spawnError("Wprowadź nazwę wydarzenia");
                 return;
             }
-            if (date < Date.now() || data.date === "0" || data.time === "0") {
+            if (date.getTime() < Date.now() || data.date === "0" || data.time === "0" || date.getFullYear() > currentDate.getFullYear() + 1) {
                 await spawnError("Podana data jest nieprawidłowa");
                 return;
             }
@@ -46,7 +47,7 @@ export const CreateEvent = () => {
                 lon: mapPos?.[0] ?? null,
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
-                time: date,
+                time: date.getTime(),
             };
             API_CLIENT.createEvent(rqObj)
                 .then(() => {
