@@ -93,7 +93,7 @@ export const CreateEvent = () => {
                                             />
                                         );
                                     },
-                                    { width: "70vw", backgroundColor: "#DDDDDD" }
+                                    { width: "70vw", backgroundColor: "#CCCCCC" }
                                 );
                             }}
                         >
