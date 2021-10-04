@@ -8,7 +8,7 @@ const eventSchema = new schema({
   },
   adress: {
     type: String,
-    required: false,
+    required: true,
   },
   created:{
   time:{
