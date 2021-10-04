@@ -79,7 +79,9 @@ export const CreateEvent = () => {
                                                 startingPos={mapPos === null ? [18.667, 54.35] : mapPos}
                                                 onSubmit={(pos) => {
                                                     getPlace(pos).then((r) => {
-                                                        const data = [r.road, r.house_number, r.city, r.country, r.postcode].filter((r) => r !== undefined);
+                                                        const data = r
+                                                            ? [r.road, r.house_number, r.city, r.country, r.postcode].filter((r) => r !== undefined)
+                                                            : ["Nieznana lokalizacja"];
                                                         setLocationText(data.join(", "));
                                                     });
                                                     setMapPos(pos);
