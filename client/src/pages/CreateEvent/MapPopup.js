@@ -30,6 +30,7 @@ export const MapPopup = (props) => {
                 <button
                     ref={mapSearchBtn}
                     type="button"
+                    style={{ width: "8%" }}
                     onClick={async () => {
                         const value = mapSearchBox.current.value;
                         const results = await searchLocation(value);
@@ -48,7 +49,7 @@ export const MapPopup = (props) => {
                 }}
                 showMarker={true}
                 width="100%"
-                height="500px"
+                height="60vh"
                 center={center}
                 zoom={zoom}
             ></Map>
