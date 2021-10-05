@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
-import React, { useState, useEffect } from "react";
 import { EventType } from "../EventType";
 export const EventPreview = (props) => {
     const getDate = (time) => {
