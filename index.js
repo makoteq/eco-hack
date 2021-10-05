@@ -38,6 +38,10 @@ app.use(passport.session());
 // Routes
 app.use("/api/auth", auth);
 
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
 
 
