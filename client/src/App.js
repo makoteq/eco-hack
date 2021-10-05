@@ -38,7 +38,19 @@ export const App = (props) => {
                         props.events.map((e) => {
                             return (
                                 <Route key={e._id} exact path={`/event/${e._id}`}>
-                                    <Event id={e._id}></Event>
+                                    <Event
+                                        data={{
+                                            name: e.name,
+                                            type: e.type,
+                                            description: e.description,
+                                            address: e.address,
+                                            time: e.time,
+                                            lat: e.lat,
+                                            lon: e.lon,
+                                            id: e._id,
+                                            createdTime: e.created.time,
+                                        }}
+                                    ></Event>
                                 </Route>
                             );
                         })}
@@ -48,5 +60,3 @@ export const App = (props) => {
         </EVENT_CONTEXT.Provider>
     );
 };
-
-export default App;
