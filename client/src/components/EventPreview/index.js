@@ -2,31 +2,8 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import React, { useState, useEffect } from "react";
+import { EventType } from "../EventType";
 export const EventPreview = (props) => {
-    const [label, setLabel] = useState("");
-    const [color, setColor] = useState("white");
-    useEffect(() => {
-        switch (props.data.type) {
-            case 1:
-                setColor("#53d188");
-                setLabel("sadzenie drzew");
-                break;
-            case 2:
-                setColor("#FBBEBE");
-                setLabel("zbieranie śmieci");
-                break;
-            case 3:
-                setColor("#FFFF99");
-                setLabel("happening/meeting");
-                break;
-            case 4:
-                setColor("#C0C0C0");
-                setLabel("inne");
-                break;
-            default:
-                break;
-        }
-    }, [label, color, props.data.type, props.data.time]);
     const getDate = (time) => {
         let date = new Date(time);
         return date.toLocaleDateString(navigator.language);
@@ -51,9 +28,7 @@ export const EventPreview = (props) => {
                     </span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center ">
-                    <div style={{ background: color }} className={styles.block}>
-                        {label}
-                    </div>
+                    <EventType type={props.data.type} />
                     <span className={styles.createdSpan}>
                         utworzone {getDate(props.data.createdTime)} o godzinie {getTime(props.data.createdTime)}
                     </span>
