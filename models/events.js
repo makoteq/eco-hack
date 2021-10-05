@@ -16,6 +16,10 @@ const eventSchema = new schema({
             required: false,
         },
     },
+    description: {
+        type: String,
+        required: false,
+    },
     type: {
         type: Number,
         required: false,
