@@ -9,12 +9,14 @@ const session = require("express-session");
 const events = require("./models/events");
 const passport = require("./passport/setup");
 const auth = require("./routes/auth");
-const MongoStore = require("connect-mongo")
 app.use(
     cors({
         origin: "*",
     })
 );
+
+
+const MongoStore = require("connect-mongo")
 // Passport middleware
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true })
@@ -57,12 +59,6 @@ app.get('/logout', function(req, res){
 
 //deploy
 app.use(express.static(path.join(__dirname, "client/build")));
-app.use(
-    cors({
-        origin: "*",
-    })
-);
-
 
 
 
