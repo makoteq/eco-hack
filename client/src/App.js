@@ -8,6 +8,7 @@ import Logo from "./components/Logo";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Event } from "./pages/Event";
 import { EVENT_CONTEXT } from "./constants";
+import { LoginPage } from "./pages/Login";
 
 export const App = (props) => {
     const [context, setContext] = useState({
@@ -32,6 +33,7 @@ export const App = (props) => {
                         <Home />
                     </Route>
                     <Route exact path="/create" component={CreateEvent} />
+                    <Route exact path="/login" component={LoginPage} />
                     {Array.isArray(props.events) &&
                         props.events.map((e) => {
                             return (

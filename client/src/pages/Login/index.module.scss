@@ -1,0 +1,13 @@
+@import "../../index.scss";
+
+.container {
+    width: $defaultWidth;
+    max-width: $maxWidth;
+    margin: auto;
+}
+.title {
+    color: $accent;
+    text-align: center;
+    font-size: 2.1em;
+    font-weight: bold;
+}
