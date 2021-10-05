@@ -19,5 +19,10 @@
     font-size: 1.2em;
     text-align: justify;
     background-color: $bggray;
-    padding: 5px;
+    padding: 5px 10px;
+}
+.stack {
+    * {
+        border-radius: 5px;
+    }
 }

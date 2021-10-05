@@ -13,7 +13,7 @@ export const Event = (props) => {
 
     return (
         <div className={container}>
-            <Stack gap={2}>
+            <Stack gap={2} className={styles.stack}>
                 <span className={styles.header}>
                     <p className={styles.title}>{data.name}</p>
                     <EventType style={{ display: "inline-block" }} type={data.type} />
