@@ -3,10 +3,9 @@
 .link {
     text-decoration: none;
     color: black !important;
+    animation: animate-in 0.3s ease;
 }
-.created{
-}
-.createdSpan{
+.createdSpan {
     text-align: right;
     font-size: 0.8em;
 }
@@ -31,20 +30,29 @@
     font-size: 1.7em;
     transition: color 0.2s ease;
 }
-.location{
+.location {
     text-align: right;
 }
-.time{
+.time {
     font-size: 1.1em;
     text-align: left;
-    
 }
-.block{
+.block {
     text-align: center;
     font-weight: 400;
     font-size: 1.2vh;
-    min-width:100px;
-    padding:5px;
-    max-height:30px;
-    border-radius:7px;
+    min-width: 100px;
+    padding: 5px;
+    max-height: 30px;
+    border-radius: 7px;
+}
+@keyframes animate-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
