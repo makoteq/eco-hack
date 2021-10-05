@@ -9,7 +9,6 @@ import { BIcon } from "../../components/BIcon";
 import { API_CLIENT } from "../../constants";
 // import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
-import Button from "@restart/ui/esm/Button";
 
 export const Home = () => {
     useTitle();
@@ -99,7 +98,7 @@ export const Home = () => {
                         <option value="distance:ascending">Odległość: najbliżej [NIE DZIAŁA]</option>
                         <option value="distance:descending">Odległość: najdalej [NIE DZIAŁA]</option>
                     </select>
-                    <Button
+                    <button
                         onClick={() => {
                             history.push("/create");
                         }}
@@ -107,7 +106,7 @@ export const Home = () => {
                     >
                         <BIcon icon="plus" />
                         Utwórz wydarzenie
-                    </Button>
+                    </button>
                 </Stack>
                 {list}
             </Stack>
