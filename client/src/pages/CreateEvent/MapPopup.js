@@ -23,6 +23,7 @@ export const MapPopup = (props) => {
                         }
                     }}
                     placeholder="Wyszukaj adres..."
+                    autoComplete={"street-address"}
                     style={{ width: "92%" }}
                     type="text"
                     ref={mapSearchBox}
