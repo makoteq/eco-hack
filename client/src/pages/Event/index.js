@@ -4,6 +4,8 @@ import { Stack } from "react-bootstrap";
 import styles from "./index.module.scss";
 import { EventField } from "../../components/EventField";
 import { EventType } from "../../components/EventType";
+import { Map } from "../../components/Map";
+import { fromLonLat } from "ol/proj";
 
 export const Event = (props) => {
     const { data } = props;
@@ -18,6 +20,7 @@ export const Event = (props) => {
                 </span>
                 {data.address && data.address !== "Brak lokalizacji" && <EventField icon="geo-alt-fill" content={data.address} />}
                 <EventField icon="calendar3" content={new Date(data.time).toLocaleString(navigator.language, { dateStyle: "full", timeStyle: "short" })} />
+                {data.lon && data.lat && <Map blockInteraction={true} width={"100%"} height={"500px"} showMarker={true} zoom={15} center={fromLonLat([data.lon, data.lat])} />}
                 <p className={styles.description}>{data.description}</p>
             </Stack>
         </div>
