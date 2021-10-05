@@ -10,7 +10,11 @@ const events = require("./models/events");
 const passport = require("./passport/setup");
 const auth = require("./routes/auth");
 const MongoStore = require("connect-mongo")
-
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 // Passport middleware
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true })
