@@ -7,7 +7,7 @@ export const spawnError = async (details) => {
         return (
             <div className={styles.container}>
                 <div className={styles.icon}>
-                    <BIcon icon="x-circle-fill" />
+                    <BIcon size={"120px"} icon="x-circle-fill" />
                 </div>
                 <h2>Coś poszło nie tak</h2>
                 <p>{details}</p>
