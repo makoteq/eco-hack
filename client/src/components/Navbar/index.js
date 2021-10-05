@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 import leaf from "../../assets/leaf.svg";
 
-export default function logo() {
+export const Navbar = () => {
     return (
         <Link to="/" style={{ textDecoration: "none" }}>
             <div className={(styles.logoCon, "d-flex align-items-center justify-content-center")}>
@@ -11,4 +11,4 @@ export default function logo() {
             </div>
         </Link>
     );
-}
+};
