@@ -3,14 +3,26 @@ import styles from "./index.module.scss";
 import { container } from "../../global.module.scss";
 import { Stack } from "react-bootstrap";
 import { useEffect, useRef } from "react";
+import { API_CLIENT } from "../../constants";
+import { useHistory } from "react-router";
+import { spawnError } from "../../utils/popups/spawnError";
 
 export const LoginPage = () => {
+    const history = useHistory();
     const form = useRef(null);
     useTitle("Logowanie");
     useEffect(() => {
         form.current.addEventListener("submit", (e) => {
             e.preventDefault();
-            console.log(e);
+            API_CLIENT.loginUser({ email: e.srcElement[0].value, password: e.srcElement[1].value })
+                .then((r) => {
+                    console.log(r);
+                    history.push("/");
+                })
+                .catch((e) => {
+                    console.error(e);
+                    spawnError(e.toString());
+                });
         });
     }, []);
 

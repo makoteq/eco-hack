@@ -7,7 +7,7 @@ export const spawnConfirm = async (details) => {
         return (
             <div className={styles.container}>
                 <div className={styles.icon}>
-                    <BIcon icon="question-circle-fill" />
+                    <BIcon size={"120px"} icon="question-circle-fill" />
                 </div>
                 <h3>{details}</h3>
                 <button className={styles.button} onClick={() => close(true)}>
