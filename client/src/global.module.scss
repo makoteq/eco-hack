@@ -1,0 +1,7 @@
+@import "./index.scss";
+
+.container {
+    width: $defaultWidth;
+    max-width: $maxWidth;
+    margin: auto;
+}

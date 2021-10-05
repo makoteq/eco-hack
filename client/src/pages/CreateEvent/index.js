@@ -5,6 +5,7 @@ import { Stack } from "react-bootstrap";
 import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
 import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
+import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { spawnError } from "../../utils/popups/spawnError";
@@ -66,7 +67,7 @@ export const CreateEvent = () => {
     const [mapPos, setMapPos] = useState(null);
 
     return (
-        <div className={styles.formContainer}>
+        <div className={container}>
             <form onSubmit={formik.handleSubmit}>
                 <Stack gap={2}>
                     <p className={styles.title}>Tworzenie nowego wydarzenia</p>

@@ -1,5 +1,6 @@
 import { useTitle } from "../../utils/useTitle";
 import styles from "./index.module.scss";
+import { container } from "../../global.module.scss";
 import { Stack } from "react-bootstrap";
 import { useEffect, useRef } from "react";
 
@@ -15,7 +16,7 @@ export const LoginPage = () => {
 
     return (
         <>
-            <div className={styles.container}>
+            <div className={container}>
                 <p className={styles.title}>Zaloguj się</p>
                 <form ref={form}>
                     <Stack gap={2}>

@@ -1,13 +1,5 @@
 @import "../../index.scss";
 
-.con {
-    width: $defaultWidth;
-    max-width: $maxWidth;
-    margin: 0 auto;
-    margin-top: 2vh;
-    font-family: "Poppins", sans-serif;
-}
-
 .create {
     padding: 7px;
     &:hover {

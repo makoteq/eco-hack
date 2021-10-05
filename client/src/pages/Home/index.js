@@ -2,6 +2,7 @@ import { useTitle } from "../../utils/useTitle";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
+import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
 // import HoldingPlant from "../../components/Pop-up/AnimatedHand";
@@ -55,7 +56,7 @@ export const Home = () => {
     const history = useHistory();
 
     return (
-        <div className={styles.con}>
+        <div className={container}>
             {/* <div className={styles.hand}>
                 <HoldingPlant />
             </div> */}
