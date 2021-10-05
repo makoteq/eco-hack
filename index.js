@@ -5,31 +5,67 @@ const app = express();
 const path = require("path");
 const port = process.env.PORT || 5000;
 const mongoose = require("mongoose");
+const session = require("express-session");
 const events = require("./models/events");
-const bodyParser = require("body-parser");
-app.use(bodyParser.json()); // to support JSON-encoded bodies
+const passport = require("./passport/setup");
+const auth = require("./routes/auth");
+const MongoStore = require("connect-mongo")
+
+// Passport middleware
+mongoose
+    .connect(process.env.MONGO_URI, { useNewUrlParser: true })
+    .then(console.log(`MongoDB connected ${process.env.MONGO_URI}`))
+    .catch(err => console.log(err));
+
+// Bodyparser middleware, extended false does not allow nested payloads
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Express Session
 app.use(
-    bodyParser.urlencoded({
-        // to support URL-encoded bodies
-        extended: true,
+    session({
+        secret: "very secret this is",
+        resave: false,
+        saveUninitialized: true,
+        store:  MongoStore.create({ mongoUrl:process.env.MONGO_URI, })
     })
 );
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use("/api/auth", auth);
+
+
+
+
+
+
+
+
+
+
+//deploy
 app.use(express.static(path.join(__dirname, "client/build")));
 app.use(
     cors({
         origin: "*",
     })
 );
-mongoose
-    .connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("connected"))
-    .catch((err) => console.log(err));
+
+
+
+
+
+//routes
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
+
+
+
 app.get("/api/getEvents", async (req, res) => {
     try {
         const event = await events.find();
@@ -40,6 +76,11 @@ app.get("/api/getEvents", async (req, res) => {
         res.status(400).json({ msg: err });
     }
 });
+
+
+
+
+
 app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
@@ -57,6 +98,10 @@ app.post("/api/createEvent", (req, res) => {
         res.status(200).json(data);
     });
 });
+
+
+
+
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
