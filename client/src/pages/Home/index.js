@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
 // import HoldingPlant from "../../components/Pop-up/AnimatedHand";
 import { EVENT_CONTEXT } from "../../constants";
-import { calculateDistance } from "../../utils/map/calculateDistance";
+// import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 
