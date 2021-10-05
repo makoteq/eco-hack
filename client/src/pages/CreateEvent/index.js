@@ -67,7 +67,7 @@ export const CreateEvent = () => {
         <div className={styles.formContainer}>
             <form onSubmit={formik.handleSubmit}>
                 <Stack gap={2}>
-                    <span className={styles.title}>Tworzenie nowego wydarzenia</span>
+                    <p className={styles.title}>Tworzenie nowego wydarzenia</p>
                     <select onChange={formik.handleChange} defaultValue={0} id="type">
                         <option hidden disabled value={0}>
                             Wybierz typ wydarzenia
