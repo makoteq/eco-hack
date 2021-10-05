@@ -3,11 +3,13 @@ import { Window } from "../../components/Window";
 import { window as windowClass } from "../../components/Window/index.module.scss";
 
 export const spawnPopup = async (elements, windowStyles) => {
-    const container = document.getElementById("popup-container");
+    const container = document.createElement("div");
     const backgroundColor = "rgba(0,0,0,0.75)";
     const animationDuration = 300;
 
-    return new Promise((resolve, reject) => {
+    container.style = "display: block; overflow: hidden; width: 100vw; height: 100vh; z-index: 20; position: fixed; top: 0; left: 0";
+
+    return new Promise((resolve) => {
         const closeWindow = (value) => {
             container.animate([{ backgroundColor: backgroundColor }, { backgroundColor: "rgba(0,0,0,0)" }], {
                 easing: "ease",
@@ -26,16 +28,12 @@ export const spawnPopup = async (elements, windowStyles) => {
             );
             setTimeout(() => {
                 ReactDOM.unmountComponentAtNode(container);
-                container.style.display = "none";
+                container.remove();
                 resolve(value ?? null);
             }, animationDuration);
         };
 
-        if (container.innerHTML !== "") {
-            reject("Another popup is active");
-        }
-
-        container.style.display = "block";
+        document.body.appendChild(container);
         ReactDOM.render(<Window style={windowStyles ?? {}}>{elements(closeWindow)}</Window>, container);
         const window = document.getElementsByClassName(windowClass)[0];
         container.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: backgroundColor }], {
