@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
+import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
-import leaf from "../../assets/leaf.svg";
+import title from "../../assets/title.svg";
 
 export const Navbar = () => {
     return (
-        <Link to="/" style={{ textDecoration: "none" }}>
-            <div className={(styles.logoCon, "d-flex align-items-center justify-content-center")}>
-                <span className={styles.logo}>eco-meet</span>
-                <img className={styles.leaf} src={leaf} alt="React Logo" />
-            </div>
-        </Link>
+        <nav className={styles.nav}>
+            <Link to="/" style={{ textDecoration: "none" }}>
+                <img alt="eco-meet title" height="60" src={title} />
+            </Link>
+            <Link to="/login" size={"70px"}>
+                <BIcon size={"30px"} icon="person-circle" />
+            </Link>
+        </nav>
     );
 };
