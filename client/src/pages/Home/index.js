@@ -1,3 +1,4 @@
+import { useTitle } from "../../utils/useTitle";
 import { useState, useRef, useEffect, useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
@@ -10,6 +11,7 @@ import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 
 export const Home = () => {
+    useTitle();
     const context = useContext(EVENT_CONTEXT);
     const [list, updateList] = useState(
         context.events.map((e, i) => {

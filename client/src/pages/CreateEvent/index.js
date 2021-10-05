@@ -1,3 +1,4 @@
+import { useTitle } from "../../utils/useTitle";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import { Stack } from "react-bootstrap";
@@ -11,6 +12,7 @@ import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
 
 export const CreateEvent = () => {
+    useTitle("Tworzenie wydarzenia");
     const context = useContext(EVENT_CONTEXT);
     const history = useHistory();
     const [locationText, setLocationText] = useState("Brak lokalizacji");
