@@ -15,7 +15,7 @@ export const Home = () => {
     const context = useContext(EVENT_CONTEXT);
     const [list, updateList] = useState(
         context.events.map((e, i) => {
-            return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
+            return <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e.id, address: e.address }} key={i} />;
         })
     );
     const sortDropdown = useRef(null);
@@ -41,7 +41,12 @@ export const Home = () => {
             });
             updateList(
                 newOrder.map((e, i) => {
-                    return <EventPreview name={e.name} type={e.type} lon={e.lon} lat={e.lat} createdTime={e.created.time} time={e.time} id={e._id} address={e.address} key={i} />;
+                    return (
+                        <EventPreview
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e.id, address: e.address }}
+                            key={i}
+                        />
+                    );
                 })
             );
         });

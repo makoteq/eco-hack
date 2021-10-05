@@ -6,7 +6,7 @@ export const EventPreview = (props) => {
     const [label, setLabel] = useState("");
     const [color, setColor] = useState("white");
     useEffect(() => {
-        switch (props.type) {
+        switch (props.data.type) {
             case 1:
                 setColor("#53d188");
                 setLabel("sadzenie drzew");
@@ -26,7 +26,7 @@ export const EventPreview = (props) => {
             default:
                 break;
         }
-    }, [label, color, props.type, props.time]);
+    }, [label, color, props.data.type, props.data.time]);
     const getDate = (time) => {
         let date = new Date(time);
         return date.toLocaleDateString(navigator.language);
@@ -39,15 +39,15 @@ export const EventPreview = (props) => {
         });
     };
     return (
-        <Link to={`/event/${props.id}`} className={styles.link}>
+        <Link to={`/event/${props.data.id}`} className={styles.link}>
             <div className={styles.item}>
-                <span className={styles.name}>{props.name ?? "Event name"}</span> <br></br>
+                <span className={styles.name}>{props.data.name ?? "Event name"}</span> <br></br>
                 <div className="d-flex justify-content-between align-items-center ">
                     <span className={styles.time}>
-                        <BIcon icon="calendar" /> {`${getDate(props.time)} ${getTime(props.time)}` ?? ""}
+                        <BIcon icon="calendar" /> {`${getDate(props.data.time)} ${getTime(props.data.time)}` ?? ""}
                     </span>
                     <span className={styles.location}>
-                        <BIcon icon="geo-alt-fill" /> {props.address?.split(", ").splice(0, 2).join(", ")}
+                        <BIcon icon="geo-alt-fill" /> {props.data.address?.split(", ").splice(0, 2).join(", ")}
                     </span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center ">
@@ -55,7 +55,7 @@ export const EventPreview = (props) => {
                         {label}
                     </div>
                     <span className={styles.createdSpan}>
-                        utworzone {getDate(props.createdTime)} o godzinie {getTime(props.createdTime)}
+                        utworzone {getDate(props.data.createdTime)} o godzinie {getTime(props.data.createdTime)}
                     </span>
                 </div>
             </div>
