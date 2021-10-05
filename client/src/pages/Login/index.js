@@ -24,7 +24,7 @@ export const LoginPage = () => {
                     spawnError(e.toString());
                 });
         });
-    }, []);
+    }, [history]);
 
     return (
         <>
