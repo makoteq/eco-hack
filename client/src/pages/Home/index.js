@@ -1,32 +1,56 @@
 import { useTitle } from "../../utils/useTitle";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import { EventPreview } from "../../components/EventPreview";
 import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
 // import HoldingPlant from "../../components/Pop-up/AnimatedHand";
-import { EVENT_CONTEXT } from "../../constants";
+import { API_CLIENT } from "../../constants";
 // import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 
 export const Home = () => {
     useTitle();
-    const context = useContext(EVENT_CONTEXT);
     const [list, updateList] = useState(
-        context.events.map((e, i) => {
+        API_CLIENT.events.map((e, i) => {
             return <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />;
         })
     );
     const sortDropdown = useRef(null);
 
     useEffect(() => {
+        API_CLIENT.on("EVENT_RELOAD", (list) => {
+            updateList(
+                list.map((e, i) => {
+                    return (
+                        <EventPreview
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
+                            key={i}
+                        />
+                    );
+                })
+            );
+        });
+        API_CLIENT.on("EVENT_CREATE", (list) => {
+            updateList(
+                list.map((e, i) => {
+                    return (
+                        <EventPreview
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
+                            key={i}
+                        />
+                    );
+                })
+            );
+        });
+
         sortDropdown.current.addEventListener("input", (e) => {
             const value = e.target.value;
             const type = value.split(":")[0];
             const direction = value.split(":")[1];
-            const newOrder = context.events.sort((a, b) => {
+            const newOrder = API_CLIENT.events.sort((a, b) => {
                 switch (type) {
                     case "event-date":
                         return direction === "ascending" ? a.time - b.time : b.time - a.time;
@@ -51,7 +75,7 @@ export const Home = () => {
                 })
             );
         });
-    }, [context.events]);
+    }, []);
 
     const history = useHistory();
 

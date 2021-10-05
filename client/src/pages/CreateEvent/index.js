@@ -1,10 +1,10 @@
 import { useTitle } from "../../utils/useTitle";
 import { useFormik } from "formik";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
-import { API_CLIENT, EVENT_CONTEXT } from "../../constants";
+import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
@@ -14,7 +14,6 @@ import { MapPopup } from "./MapPopup";
 
 export const CreateEvent = () => {
     useTitle("Tworzenie wydarzenia");
-    const context = useContext(EVENT_CONTEXT);
     const history = useHistory();
     const [locationText, setLocationText] = useState("Brak lokalizacji");
     const formik = useFormik({
@@ -46,7 +45,7 @@ export const CreateEvent = () => {
             const rqObj = {
                 name: data.name,
                 type: parseInt(data.type),
-                description: data.description,
+                description: data.description ?? null,
                 lon: mapPos?.[0] ?? null,
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
@@ -54,10 +53,7 @@ export const CreateEvent = () => {
             };
             API_CLIENT.createEvent(rqObj)
                 .then(() => {
-                    API_CLIENT.getEvents().then((r) => {
-                        context.updateEvents(r);
-                        history.push("/");
-                    });
+                    history.push("/");
                 })
                 .catch(async (e) => {
                     await spawnError(e.toString());

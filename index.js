@@ -51,10 +51,10 @@ app.post("/api/createEvent", (req, res) => {
         lat: req.body.lat,
         lon: req.body.lon,
     };
-    events.create(data, (err) => {
+    events.create(data, (err, data) => {
         if (err) return res.status(400).json({ msg: err });
         // saved!
-        res.status(200).json("ok");
+        res.status(200).json(data);
     });
 });
 app.use((req, res, next) => {

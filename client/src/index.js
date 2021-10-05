@@ -6,11 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { API_CLIENT } from "./constants";
 
 (async () => {
-    const dbEvents = await API_CLIENT.getEvents();
+    await API_CLIENT.fetchEvents();
 
     ReactDOM.render(
         <React.StrictMode>
-            <App events={dbEvents} />
+            <App />
         </React.StrictMode>,
         document.getElementById("root")
     );

@@ -1,22 +1,33 @@
 import axios from "axios";
+import { EventEmitter } from "events";
 
-export class APIClient {
+export class APIClient extends EventEmitter {
     #dbUrl = "";
+    #events = [];
 
     constructor(dbUrl) {
+        super();
         if (typeof dbUrl !== "string") throw new Error("Database URL is not a string");
         this.#dbUrl = dbUrl;
     }
-    async getEvents() {
+
+    get events() {
+        return this.#events;
+    }
+
+    async fetchEvents() {
         const rq = await axios.get(`${this.#dbUrl}/api/getEvents`);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        this.#events = rq.data;
+        this.emit("EVENT_RELOAD", this.#events, rq.data);
         return rq.data;
     }
+
     async getEvent(id) {
         if (typeof id !== "string") throw new TypeError("Invalid ID type");
-        const events = await this.getEvents();
-        return events.find((e) => e.id === id) ?? null;
+        return this.#events.find((e) => e.id === id) ?? null;
     }
+
     async createEvent(data) {
         //Check types
         if (typeof data !== "object") throw new TypeError("Data object is required");
@@ -27,6 +38,8 @@ export class APIClient {
         //Make POST request
         const rq = await axios.post(`${this.#dbUrl}/api/createEvent`, data);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        return rq;
+        this.#events.push(rq.data);
+        this.emit("EVENT_CREATE", this.#events, rq.data);
+        return rq.data;
     }
 }
