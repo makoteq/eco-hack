@@ -35,7 +35,7 @@ export const spawnPopup = async (elements, windowStyles) => {
 
         document.body.appendChild(container);
         ReactDOM.render(<Window style={windowStyles ?? {}}>{elements(closeWindow)}</Window>, container);
-        const window = document.getElementsByClassName(windowClass)[0];
+        const window = container.children[0];
         container.animate([{ backgroundColor: "rgba(0,0,0,0)" }, { backgroundColor: backgroundColor }], {
             easing: "ease",
             duration: animationDuration,
