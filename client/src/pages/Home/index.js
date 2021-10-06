@@ -11,6 +11,7 @@ import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { spawnError } from "../../utils/popups/spawnError";
+import { getUserPos } from "../../utils/getUserPos";
 
 export const Home = () => {
     useTitle();
@@ -27,33 +28,23 @@ export const Home = () => {
         if (type === "distance") {
             const permissions = await window.navigator.permissions.query({ name: "geolocation" });
             if (permissions.state === "granted") {
-                await window.navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                        userPos = [pos.coords.longitude, pos.coords.latitude];
-                    },
-                    async (e) => {
-                        console.error(e);
-                        await spawnError(e.toString());
-                        userPos = null;
-                    }
-                );
+                userPos = await getUserPos().catch(async () => {
+                    await spawnError("Wystąpił nieoczekiwany błąd podczas próby dostępu do usługi geolokalizacji");
+                    return null;
+                });
             } else if (permissions.state === "prompt") {
-                userPos = await spawnPopup((c) => {
-                    window.navigator.geolocation.getCurrentPosition(
-                        (pos) => {
-                            c([pos.coords.longitude, pos.coords.latitude]);
-                        },
-                        async (e) => {
-                            console.error(e);
-                            await spawnError("Brak dostępu do lokalizacji");
-                            c(null);
-                        }
-                    );
+                let closeFn;
+                spawnPopup((c) => {
+                    closeFn = c;
                     return <h1>Oczekiwanie na przyznanie uprawnień</h1>;
                 });
+                userPos = await getUserPos().catch(async () => {
+                    await spawnError("Nie udało się uzyskać lokalizacji urządzenia lub nastąpiła odmowa dostępu");
+                    return null;
+                });
+                closeFn();
             } else if (permissions.state === "denied") {
                 await spawnError("Odmówiono aplikacji dostępu do lokalizacji urządzenia");
-                userPos = null;
             }
             if (!userPos) {
                 sortDropdown.current.value = "event-date:ascending";
