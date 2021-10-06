@@ -42,7 +42,7 @@ app.use(passport.session());
 
 app.get("/api/isLogged", async (req, res) => {
     if (req.user) {
-        res.status(200).json(req.user);
+        res.status(200).json({email:req.user.email,session:req.sessionID});
     } else {
         res.redirect('/login');
     }
@@ -52,7 +52,7 @@ app.use("/api/auth", auth);
 
 app.get("/api/logout", function (req, res) {
     req.logout();
-    res.status(200).join({ successful: true });
+    res.status(200).json("ok");
     // res.redirect('/');
 });
 
