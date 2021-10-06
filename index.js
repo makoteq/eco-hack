@@ -117,7 +117,6 @@ app.post("/api/getSessioniId", (req, res) => {
         res.status(400).json({ msg: err });
     }
     });
-});
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
