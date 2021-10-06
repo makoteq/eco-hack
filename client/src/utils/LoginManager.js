@@ -35,11 +35,11 @@ export class LoginManager extends EventEmitter {
         return null;
     }
 
-    async validate() {
-        if (!this.#loginState.sessionId) throw new Error("No session ID present");
-        const rq = await axios.get(`${this.#dbUrl}/api/validateLogin`);
+    async fetchSession() {
+        const rq = await axios.get(`${this.#dbUrl}/api/isLogged`);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
         this.#loginState = rq.data ?? null;
+        this.emit("STATE_CHANGE", this.#loginState);
         return rq.data ?? null;
     }
 }

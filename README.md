@@ -15,7 +15,7 @@
 ## General Information
 - The App was created for the mini Hackathon - edycja I organised by Nowa Akademia.
 - Eco-meet is a meeting platfrom designed to solve the environmental issue.
-- The purpose of our project is to have people cooperate for the couse of saving our planet.
+- The purpose of our project is to have people cooperate for the sake of saving our planet.
 
 ## Technologies Used
 - React - version 17.0.2
@@ -29,16 +29,14 @@
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
-
+![image](https://user-images.githubusercontent.com/60068941/136275600-b5fb811b-68a8-41dd-a184-ee321f097de8.png)
 
 ## Usage
 Simply visit our internet website ecomeet.me and start saving our planet!
 
 
-## Project Status
-Project is: _in progress_
+## Project Status:
+_in progress_
 
 
 ## Room for Improvement
