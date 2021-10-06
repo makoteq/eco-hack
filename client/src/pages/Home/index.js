@@ -48,6 +48,7 @@ export const Home = () => {
             }
             if (!userPos) {
                 sortDropdown.current.value = "event-date:ascending";
+                window.localStorage.setItem("sorting", "event-date:ascending");
                 return;
             }
         }
@@ -76,6 +77,7 @@ export const Home = () => {
                 );
             })
         );
+        window.localStorage.setItem("sorting", `${type}:${direction}`);
     };
 
     useEffect(() => {
@@ -95,7 +97,9 @@ export const Home = () => {
         API_CLIENT.on("EVENT_CREATE", apiClientCallback);
 
         sortDropdown.current.addEventListener("input", sortingFn);
-        sortingFn({ target: sortDropdown.current });
+        const cachedValue = window.localStorage.getItem("sorting");
+        sortingFn(cachedValue ? { target: { value: cachedValue } } : { target: sortDropdown.current });
+        if (cachedValue) sortDropdown.current.value = cachedValue;
     }, []);
 
     return (
