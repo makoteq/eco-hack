@@ -23,7 +23,9 @@ export class APIClient extends EventEmitter {
         return rq.data;
     }
     async getUserEvents(data) {
+        console.log(data);
         const rq = await axios.post(`${this.#dbUrl}/api/getUserEvents`, data);
+        console.log(rq);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
         return rq.data;
     }

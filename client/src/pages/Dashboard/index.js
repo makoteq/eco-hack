@@ -8,7 +8,7 @@ import { LOGIN_MANAGER } from "../../constants";
 export const Dashboard = () => {
     useEffect(() => {
         //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
-        console.log(API_CLIENT.getUserEvents({email:"GRZANA"}).then((d) => {console.log(d)}))
+        console.log(API_CLIENT.getUserEvents({email:"test@gmail.com"}).then((d) => {console.log(d)}))
     }, []);
   const [list, updateList] = useState(
     ['o','i'].map((e, i) => {

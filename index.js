@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const session = require("express-session");
 const events = require("./models/events");
+const users = require("./models/users");
 const passport = require("./passport/setup");
 const auth = require("./routes/auth");
 app.use(
@@ -30,8 +31,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
     session({
         secret: "very secret this is",
-        resave: false,
+        resave: true,
         saveUninitialized: true,
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000
+        },
         store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     })
 );
@@ -42,7 +46,7 @@ app.use(passport.session());
 
 app.get("/api/isLogged", async (req, res) => {
     if (req.user) {
-        res.status(200).json({email:req.user.email,session:req.sessionID});
+        res.status(200).json(req.user);
     } else {
         res.redirect('/login');
     }
@@ -75,19 +79,19 @@ app.get("/api/getEvents", async (req, res) => {
     }
 });
 
-app.get("/api/getUserEvents", async (req, res) => {
-    if (req.user) {
+app.post("/api/getUserEvents", async (req, res) => {
+   // if (req.user) {
         try {
-            const event = await events.find({email:req.body.email});
-            if (!event) throw Error("something went wrong");
-            console.log(event);
-            res.status(200).json(event);
+            const user = await users.findOne({email:req.body.email});
+            console.log(req.body.email);
+            if (!user) throw Error("something went wrong");
+            res.status(200).json(user);
         } catch (err) {
             res.status(400).json({ msg: err });
         }
-    } else {
+   /* } else {
         res.redirect('/login');
-    }
+    }*/
 });
 
 app.post("/api/createEvent", (req, res) => {
