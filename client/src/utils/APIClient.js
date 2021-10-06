@@ -48,14 +48,4 @@ export class APIClient extends EventEmitter {
         this.emit("EVENT_CREATE", this.#events, rq.data);
         return rq.data;
     }
-
-    async loginUser(data) {
-        if (!data) throw new Error("Missing required parameter");
-        if (typeof data.email !== "string") throw new TypeError("name param is a required string");
-        if (typeof data.password !== "string") throw new TypeError("name param is a required string");
-
-        const rq = await axios.post(`${this.#dbUrl}/api/auth/register_login`, data);
-        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        return rq;
-    }
 }

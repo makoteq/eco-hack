@@ -38,7 +38,12 @@ export const Home = () => {
                 let closeFn;
                 spawnPopup((c) => {
                     closeFn = c;
-                    return <h1>Oczekiwanie na przyznanie uprawnień</h1>;
+                    return (
+                        <div className={styles.popupContainer}>
+                            <BIcon color="rgb(0,0,100)" icon="info-circle-fill" size={"120px"} />
+                            <h3 style={{ textAlign: "center" }}>Oczekiwanie na przyznanie uprawnień przez użytkownika</h3>
+                        </div>
+                    );
                 });
                 userPos = await getUserPos().catch(async () => {
                     await spawnError("Nie udało się uzyskać lokalizacji urządzenia lub nastąpiła odmowa dostępu");
