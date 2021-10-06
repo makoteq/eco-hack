@@ -9,6 +9,15 @@
     text-align: right;
     font-size: 0.8em;
 }
+.trash{
+    text-align: center;
+    font-size: 1.6em;
+    background-color:$red;
+    color:white;
+    width:80px;
+    border-radius:10px;
+    cursor:pointer;
+}
 .item {
     text-align: left;
     border: 1px solid black;
