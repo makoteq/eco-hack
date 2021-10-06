@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.closeBtn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(255, 100, 100);
+    color: white;
+    &:hover {
+        background-color: darken(rgb(255, 100, 100), 20);
+    }
+}
+
+.logoutBtn {
+    background-color: red;
+    &:hover {
+        background-color: darken(red, 20);
+    }
+    color: white;
+    padding: 5px 10px;
+}

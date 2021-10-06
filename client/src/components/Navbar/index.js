@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import title from "../../assets/title.svg";
+import { LOGIN_MANAGER } from "../../constants";
+import { spawnPopup } from "../../utils/popups/spawnPopup";
+import { LoginPanel } from "../LoginPanel";
+import { UserPanel } from "../UserPanel";
 
 export const Navbar = () => {
     return (
@@ -9,9 +13,24 @@ export const Navbar = () => {
             <Link to="/" style={{ textDecoration: "none" }}>
                 <img alt="eco-meet title" height="60" src={title} />
             </Link>
-            <Link to="/login" size={"70px"}>
+            <button
+                onClick={async () => {
+                    if (LOGIN_MANAGER.state) {
+                        await spawnPopup(
+                            (close) => {
+                                return <UserPanel close={close} />;
+                            },
+                            { minWidth: "30vw" }
+                        );
+                    } else {
+                        await spawnPopup((close) => {
+                            return <LoginPanel close={close} />;
+                        });
+                    }
+                }}
+            >
                 <BIcon size={"30px"} icon="person-circle" />
-            </Link>
+            </button>
         </nav>
     );
 };

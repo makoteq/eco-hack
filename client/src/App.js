@@ -9,7 +9,6 @@ import { Navbar } from "./components/Navbar";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Event } from "./pages/Event";
 import { API_CLIENT } from "./constants";
-import { LoginPage } from "./pages/Login";
 
 export const App = () => {
     const [routes, setRoutes] = useState(
@@ -94,7 +93,6 @@ export const App = () => {
                     <Home />
                 </Route>
                 <Route exact path="/create" component={CreateEvent} />
-                <Route exact path="/login" component={LoginPage} />
                 {routes}
                 <Route component={NotFound} />
             </Switch>
