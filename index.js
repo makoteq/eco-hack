@@ -40,10 +40,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get("/api/isLogged", async (req, res) => {
+    if (req.user) {
+        res.status(200).json(req.user);
+    } else {
+        res.redirect('/login');
+    }
+});
 // Routes
 app.use("/api/auth", auth);
 
-app.get("/logout", function (req, res) {
+app.get("/api/logout", function (req, res) {
     req.logout();
     res.status(200).join({ successful: true });
     // res.redirect('/');
