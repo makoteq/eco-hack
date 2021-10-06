@@ -26,7 +26,7 @@ export const App = () => {
                             lat: e.lat,
                             lon: e.lon,
                             id: e._id,
-                            createdTime: e.created.time,
+                            createdTime: e.created?.time,
                         }}
                     ></Event>
                 </Route>

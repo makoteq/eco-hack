@@ -17,7 +17,9 @@ export const Home = () => {
     useTitle();
     const [list, updateList] = useState(
         API_CLIENT.events.map((e, i) => {
-            return <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />;
+            return (
+                <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }} key={i} />
+            );
         })
     );
     const sortDropdown = useRef(null);
@@ -48,6 +50,7 @@ export const Home = () => {
             }
             if (!userPos) {
                 sortDropdown.current.value = "event-date:ascending";
+                window.localStorage.setItem("sorting", "event-date:ascending");
                 return;
             }
         }
@@ -72,10 +75,14 @@ export const Home = () => {
         updateList(
             newOrder.map((e, i) => {
                 return (
-                    <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />
+                    <EventPreview
+                        data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                        key={i}
+                    />
                 );
             })
         );
+        window.localStorage.setItem("sorting", `${type}:${direction}`);
     };
 
     useEffect(() => {
@@ -84,7 +91,7 @@ export const Home = () => {
                 list.map((e, i) => {
                     return (
                         <EventPreview
-                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
                             key={i}
                         />
                     );
@@ -95,7 +102,9 @@ export const Home = () => {
         API_CLIENT.on("EVENT_CREATE", apiClientCallback);
 
         sortDropdown.current.addEventListener("input", sortingFn);
-        sortingFn({ target: sortDropdown.current });
+        const cachedValue = window.localStorage.getItem("sorting");
+        sortingFn(cachedValue ? { target: { value: cachedValue } } : { target: sortDropdown.current });
+        if (cachedValue) sortDropdown.current.value = cachedValue;
     }, []);
 
     return (
