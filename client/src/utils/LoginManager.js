@@ -22,9 +22,9 @@ export class LoginManager extends EventEmitter {
 
         const rq = await axios.post(`${this.#dbUrl}/api/auth/register_login`, data);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        this.#loginState = rq.data;
+        this.#loginState = rq.data ?? null;
         this.emit("STATE_CHANGE", this.#loginState);
-        return rq.data;
+        return rq.data ?? null;
     }
 
     async logout() {
@@ -33,5 +33,13 @@ export class LoginManager extends EventEmitter {
         this.#loginState = null;
         this.emit("STATE_CHANGE", null);
         return null;
+    }
+
+    async validate() {
+        if (!this.#loginState.sessionId) throw new Error("No session ID present");
+        const rq = await axios.get(`${this.#dbUrl}/api/validateLogin`);
+        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        this.#loginState = rq.data ?? null;
+        return rq.data ?? null;
     }
 }
