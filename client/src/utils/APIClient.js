@@ -22,6 +22,12 @@ export class APIClient extends EventEmitter {
         this.emit("EVENT_RELOAD", this.#events, rq.data);
         return rq.data;
     }
+    async getUserEvents(data) {
+        const rq = await axios.post(`${this.#dbUrl}/api/getUserEvents`,data);
+        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        this.emit("EVENT_RELOAD", this.#events, rq.data);
+        return rq.data;
+    }
 
     async getEvent(id) {
         if (typeof id !== "string") throw new TypeError("Invalid ID type");

@@ -75,6 +75,21 @@ app.get("/api/getEvents", async (req, res) => {
     }
 });
 
+app.get("/api/getUserEvents", async (req, res) => {
+    if (req.user) {
+        try {
+            const event = await events.find({email:req.body.email});
+            if (!event) throw Error("something went wrong");
+            console.log(event);
+            res.status(200).json(event);
+        } catch (err) {
+            res.status(400).json({ msg: err });
+        }
+    } else {
+        res.redirect('/login');
+    }
+});
+
 app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
