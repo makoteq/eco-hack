@@ -14,6 +14,7 @@ export const Navbar = () => {
                 <img alt="eco-meet title" height="60" src={title} />
             </Link>
             <button
+                className={styles.navBtn}
                 onClick={async () => {
                     if (LOGIN_MANAGER.state) {
                         await spawnPopup(
