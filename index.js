@@ -107,6 +107,17 @@ app.post("/api/createEvent", (req, res) => {
         res.status(200).json(data);
     });
 });
+app.post("/api/getSessioniId", (req, res) => {
+    try {
+        const id = await events.findOne({_id:req.body.id});
+        if (!id) throw Error("something went wrong");
+        console.log(event);
+        res.status(200).json(id);
+    } catch (err) {
+        res.status(400).json({ msg: err });
+    }
+    });
+});
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
