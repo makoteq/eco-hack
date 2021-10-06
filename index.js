@@ -56,7 +56,8 @@ app.use("/api/auth", auth);
 
 app.get("/api/logout", function (req, res) {
     req.logout();
-    res.status(200).json("ok");
+    req.session.destroy();
+    res.status(200).json("logged out");
     // res.redirect('/');
 });
 
