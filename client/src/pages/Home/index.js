@@ -6,7 +6,7 @@ import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { BIcon } from "../../components/BIcon";
 // import HoldingPlant from "../../components/Pop-up/AnimatedHand";
-import { API_CLIENT } from "../../constants";
+import { API_CLIENT, LOGIN_MANAGER } from "../../constants";
 import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
@@ -133,6 +133,7 @@ export const Home = () => {
                         <option value="distance:descending">Odległość: najdalej</option>
                     </select>
                     <button
+                        disabled={!LOGIN_MANAGER.state}
                         onClick={() => {
                             history.push("/create");
                         }}
