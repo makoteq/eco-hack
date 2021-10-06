@@ -35,8 +35,8 @@
 Simply visit our internet website ecomeet.me and start saving our planet!
 
 
-## Project Status
-Project is: _in progress_
+## Project Status:
+_in progress_
 
 
 ## Room for Improvement
