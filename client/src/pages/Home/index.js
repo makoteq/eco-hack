@@ -17,7 +17,9 @@ export const Home = () => {
     useTitle();
     const [list, updateList] = useState(
         API_CLIENT.events.map((e, i) => {
-            return <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />;
+            return (
+                <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }} key={i} />
+            );
         })
     );
     const sortDropdown = useRef(null);
@@ -73,7 +75,10 @@ export const Home = () => {
         updateList(
             newOrder.map((e, i) => {
                 return (
-                    <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />
+                    <EventPreview
+                        data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                        key={i}
+                    />
                 );
             })
         );
@@ -86,7 +91,7 @@ export const Home = () => {
                 list.map((e, i) => {
                     return (
                         <EventPreview
-                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
                             key={i}
                         />
                     );
