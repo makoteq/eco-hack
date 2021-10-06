@@ -15,13 +15,12 @@ app.use(
     })
 );
 
-
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 // Passport middleware
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true })
     .then(console.log(`MongoDB connected ${process.env.MONGO_URI}`))
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 
 // Bodyparser middleware, extended false does not allow nested payloads
 app.use(express.json());
@@ -33,7 +32,7 @@ app.use(
         secret: "very secret this is",
         resave: false,
         saveUninitialized: true,
-        store:  MongoStore.create({ mongoUrl:process.env.MONGO_URI, })
+        store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     })
 );
 
@@ -44,31 +43,19 @@ app.use(passport.session());
 // Routes
 app.use("/api/auth", auth);
 
-app.get('/logout', function(req, res){
+app.get("/logout", function (req, res) {
     req.logout();
-    res.redirect('/');
-  });
-
-
-
-
-
-
-
-
+    res.status(200).join({ successful: true });
+    // res.redirect('/');
+});
 
 //deploy
 app.use(express.static(path.join(__dirname, "client/build")));
-
-
-
 
 //routes
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
-
-
 
 app.get("/api/getEvents", async (req, res) => {
     try {
@@ -80,10 +67,6 @@ app.get("/api/getEvents", async (req, res) => {
         res.status(400).json({ msg: err });
     }
 });
-
-
-
-
 
 app.post("/api/createEvent", (req, res) => {
     let data = {
@@ -102,9 +85,6 @@ app.post("/api/createEvent", (req, res) => {
         res.status(200).json(data);
     });
 });
-
-
-
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
