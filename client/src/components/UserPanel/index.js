@@ -1,6 +1,5 @@
 import styles from "./index.module.scss";
 import { LOGIN_MANAGER } from "../../constants";
-import { Stack } from "react-bootstrap";
 import { BIcon } from "../BIcon";
 
 export const UserPanel = (props) => {
