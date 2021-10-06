@@ -29,3 +29,10 @@
     position: absolute;
     left: 0;
 }
+
+.popupContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
