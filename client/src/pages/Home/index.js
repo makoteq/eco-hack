@@ -11,10 +11,7 @@ import { calculateDistance } from "../../utils/map/calculateDistance";
 import { useHistory } from "react-router";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { spawnError } from "../../utils/popups/spawnError";
-<<<<<<< HEAD
-=======
 import { getUserPos } from "../../utils/getUserPos";
->>>>>>> 3420a282f104ee2c8b24c37ec76fc6aca20ce80f
 
 export const Home = () => {
     useTitle();
