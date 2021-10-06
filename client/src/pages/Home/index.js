@@ -20,39 +20,24 @@ export const Home = () => {
         })
     );
     const sortDropdown = useRef(null);
-
-    useEffect(() => {
-        API_CLIENT.on("EVENT_RELOAD", (list) => {
-            updateList(
-                list.map((e, i) => {
-                    return (
-                        <EventPreview
-                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
-                            key={i}
-                        />
-                    );
-                })
-            );
-        });
-        API_CLIENT.on("EVENT_CREATE", (list) => {
-            updateList(
-                list.map((e, i) => {
-                    return (
-                        <EventPreview
-                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
-                            key={i}
-                        />
-                    );
-                })
-            );
-        });
-
-        sortDropdown.current.addEventListener("input", async (e) => {
-            const value = e.target.value;
-            const type = value.split(":")[0];
-            const direction = value.split(":")[1];
-            let userPos = [null, null];
-            if (type === "distance") {
+    const history = useHistory();
+    const sortingFn = async (e) => {
+        const [type, direction] = e.target.value.split(":");
+        let userPos;
+        if (type === "distance") {
+            const permissions = await window.navigator.permissions.query({ name: "geolocation" });
+            if (permissions.state === "granted") {
+                await window.navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        userPos = [pos.coords.longitude, pos.coords.latitude];
+                    },
+                    async (e) => {
+                        console.error(e);
+                        await spawnError(e.toString());
+                        userPos = null;
+                    }
+                );
+            } else if (permissions.state === "prompt") {
                 userPos = await spawnPopup((c) => {
                     window.navigator.geolocation.getCurrentPosition(
                         (pos) => {
@@ -61,36 +46,51 @@ export const Home = () => {
                         async (e) => {
                             console.error(e);
                             await spawnError("Brak dostępu do lokalizacji");
-                            c([null, null]);
+                            c(null);
                         }
                     );
                     return <h1>Oczekiwanie na przyznanie uprawnień</h1>;
                 });
-                if (userPos === [null, null]) {
-                    sortDropdown.current.value = "event-date:ascending";
-                    return;
-                }
+            } else if (permissions.state === "denied") {
+                await spawnError("Odmówiono aplikacji dostępu do lokalizacji urządzenia");
+                userPos = null;
             }
-            const newOrder = API_CLIENT.events.sort((a, b) => {
-                switch (type) {
-                    case "event-date":
-                        return direction === "ascending" ? a.time - b.time : b.time - a.time;
-                    case "creation-date":
-                        return direction === "ascending" ? b.created.time - a.created.time : a.created.time - b.created.time;
-                    case "alphabetic":
-                        return direction === "ascending" ? (a.name > b.name ? -1 : 1) : a.name > b.name ? 1 : -1;
-                    case "distance":
-                        if (userPos !== [null, null]) {
-                            const aDistance = a.lon && a.lat ? calculateDistance(userPos, [a.lon, a.lat]) : -1;
-                            const bDistance = b.lon && b.lat ? calculateDistance(userPos, [b.lon, b.lat]) : -1;
-                            return direction === "ascending" ? aDistance - bDistance : bDistance - aDistance;
-                        } else return 0;
-                    default:
-                        return 0;
-                }
-            });
+            if (!userPos) {
+                sortDropdown.current.value = "event-date:ascending";
+                return;
+            }
+        }
+        const newOrder = API_CLIENT.events.sort((a, b) => {
+            switch (type) {
+                case "event-date":
+                    return direction === "ascending" ? a.time - b.time : b.time - a.time;
+                case "creation-date":
+                    return direction === "ascending" ? b.created.time - a.created.time : a.created.time - b.created.time;
+                case "alphabetic":
+                    return direction === "ascending" ? (a.name > b.name ? -1 : 1) : a.name > b.name ? 1 : -1;
+                case "distance":
+                    if (userPos !== [null, null]) {
+                        const aDistance = a.lon && a.lat ? calculateDistance(userPos, [a.lon, a.lat]) : -1;
+                        const bDistance = b.lon && b.lat ? calculateDistance(userPos, [b.lon, b.lat]) : -1;
+                        return direction === "ascending" ? aDistance - bDistance : bDistance - aDistance;
+                    } else return 0;
+                default:
+                    return 0;
+            }
+        });
+        updateList(
+            newOrder.map((e, i) => {
+                return (
+                    <EventPreview data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }} key={i} />
+                );
+            })
+        );
+    };
+
+    useEffect(() => {
+        const apiClientCallback = (list) => {
             updateList(
-                newOrder.map((e, i) => {
+                list.map((e, i) => {
                     return (
                         <EventPreview
                             data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created.time, time: e.time, id: e._id, address: e.address }}
@@ -99,10 +99,13 @@ export const Home = () => {
                     );
                 })
             );
-        });
-    }, []);
+        };
+        API_CLIENT.on("EVENT_RELOAD", apiClientCallback);
+        API_CLIENT.on("EVENT_CREATE", apiClientCallback);
 
-    const history = useHistory();
+        sortDropdown.current.addEventListener("input", sortingFn);
+        sortingFn({ target: sortDropdown.current });
+    }, []);
 
     return (
         <div className={container}>
