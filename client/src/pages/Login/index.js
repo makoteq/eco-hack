@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { container } from "../../global.module.scss";
 import { Stack } from "react-bootstrap";
 import { useEffect, useRef } from "react";
-import { API_CLIENT } from "../../constants";
+import { LOGIN_MANAGER } from "../../constants";
 import { useHistory } from "react-router";
 import { spawnError } from "../../utils/popups/spawnError";
 
@@ -14,7 +14,7 @@ export const LoginPage = () => {
     useEffect(() => {
         form.current.addEventListener("submit", (e) => {
             e.preventDefault();
-            API_CLIENT.loginUser({ email: e.srcElement[0].value, password: e.srcElement[1].value })
+            LOGIN_MANAGER.login({ email: e.srcElement[0].value, password: e.srcElement[1].value })
                 .then((r) => {
                     console.log(r);
                     history.push("/");

@@ -1,9 +1,11 @@
 import { APIClient } from "./utils/APIClient";
+import { LoginManager } from "./utils/LoginManager";
 require("dotenv").config();
 
 export const APP_NAME = "eco-meet";
 export const BACKEND_URL = "http://localhost:5000";
 export const API_CLIENT = new APIClient(process.env.DEPLOY ? "" : BACKEND_URL);
+export const LOGIN_MANAGER = new LoginManager(process.env.DEPLOY ? "" : BACKEND_URL);
 export const EVENT_TYPES = {
     colors: {
         1: "#53d188",
