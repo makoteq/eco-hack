@@ -68,19 +68,6 @@ app.get("/api/getEvents", async (req, res) => {
     }
 });
 
-app.get("/api/isLogged", async (req, res) => {
-    if (req.user) {
-        res.status(200).json({ id: req.user.id, email: req.user.email });
-
-    } else {
-        res.redirect('/login');
-    }
-});
-
-
-
-
-
 app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
