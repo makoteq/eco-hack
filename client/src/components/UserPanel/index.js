@@ -15,6 +15,15 @@ export const UserPanel = (props) => {
             <h1>{LOGIN_MANAGER.state.email ?? "Nieznany użytkownik"}</h1>
             <Stack gap={2}>
                 <button
+                    aria-label="Dashboard"
+                    onClick={() => {
+                        props.history?.push("/dashboard");
+                        props.close();
+                    }}
+                >
+                    Dashboard
+                </button>
+                <button
                     aria-label="Wyloguj się"
                     onClick={async () => {
                         await LOGIN_MANAGER.logout();
@@ -23,15 +32,6 @@ export const UserPanel = (props) => {
                     className={styles.logoutBtn}
                 >
                     <BIcon icon="box-arrow-right" /> Wyloguj się
-                </button>
-                <button
-                    aria-label="Dashboard"
-                    onClick={() => {
-                        props.history?.push("/dashboard");
-                        props.close();
-                    }}
-                >
-                    Dashboard
                 </button>
             </Stack>
         </div>
