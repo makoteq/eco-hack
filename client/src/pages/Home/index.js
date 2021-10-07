@@ -22,8 +22,6 @@ export const Home = () => {
                     return direction === "ascending" ? a.time - b.time : b.time - a.time;
                 case "creation-date":
                     return direction === "ascending" ? b.created.time - a.created.time : a.created.time - b.created.time;
-                case "alphabetic":
-                    return direction === "ascending" ? (a.name > b.name ? -1 : 1) : a.name > b.name ? 1 : -1;
                 case "distance":
                     if (userPos) {
                         const aDistance = a.lon && a.lat ? calculateDistance(userPos, [a.lon, a.lat]) : -1;
@@ -165,8 +163,6 @@ export const Home = () => {
                         <option value="event-date:descending">Najstarsze</option>
                         <option value="creation-date:ascending">Ostatnio utworzone</option>
                         <option value="creation-date:descending">Najpóźniej utworzone</option>
-                        <option value="alphabetic:ascending">A do Z</option>
-                        <option value="alphabetic:descending">Z do A</option>
                         <option value="distance:ascending">Najbliżej</option>
                         <option value="distance:descending">Najdalej</option>
                     </select>
