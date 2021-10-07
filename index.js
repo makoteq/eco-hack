@@ -48,7 +48,7 @@ app.get("/api/isLogged", async (req, res) => {
     if (req.user) {
         res.status(200).json(req.user);
     } else {
-        res.status(200).json("not logged");
+        res.status(404).json("not logged");
     }
 });
 // Routes
