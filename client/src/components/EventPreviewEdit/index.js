@@ -16,7 +16,8 @@ export const EventPreviewEdit = (props) => {
     });
   };
   const deleteItem = (arg) => {
-    API_CLIENT.getUserEvents({id:arg});
+    console.log("deleting..."+arg)
+    API_CLIENT.deleteEvent({id:arg});
   };
   return (
     <div  className={styles.link}>
@@ -27,7 +28,7 @@ export const EventPreviewEdit = (props) => {
             {props.data.name ?? "Event name"}
           </span>
           <br></br>
-          <span onClick={deleteItem(props.data._id)} className={styles.trash}>
+          <span onClick={()=>deleteItem(props.data.id)} className={styles.trash}>
             <BIcon icon="trash" />
           </span>
         </div>

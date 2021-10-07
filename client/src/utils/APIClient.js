@@ -23,7 +23,7 @@ export class APIClient extends EventEmitter {
         return rq.data;
     }
     async deleteEvent(item) {
-        const rq = await axios.post(`${this.#dbUrl}/api/getEvents`,item);
+        const rq = await axios.post(`${this.#dbUrl}/api/deleteEvent`,item);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
         return rq.data;
     }
