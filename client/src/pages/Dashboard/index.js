@@ -11,10 +11,14 @@ export const Dashboard = () => {
   useEffect(() => {
 
     //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
-    API_CLIENT.getUserEvents("87").then((events) => {
+    API_CLIENT.isLogged().then((data) => {
+      console.log(data.email);
+      if(data=="not logged")
+ {   API_CLIENT.getUserEvents("test").then((events) => {
       array.push(events);
       console.log(array); 
       render();
+    });}
     });
   }, []);
   

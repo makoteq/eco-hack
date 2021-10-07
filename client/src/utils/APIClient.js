@@ -34,6 +34,11 @@ export class APIClient extends EventEmitter {
         console.log(rq.data);
         return rq.data;
     }
+    async isLogged() {
+        const rq = await axios.get(`${this.#dbUrl}/api/isLogged`);
+        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        return rq.data;
+    }
 
     async getEvent(id) {
         if (typeof id !== "string") throw new TypeError("Invalid ID type");

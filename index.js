@@ -91,12 +91,15 @@ app.post("/api/deleteEvent", async (req, res) => {
 });
 
 app.post("/api/getUserEvents", async (req, res) => {
+
    // if (req.user) {
         try {
-            const user = await events.findOne({user:req.body.email});
-            console.log(user);
-            if (!user) throw Error("something went wrong");
-            res.status(200).json(user);
+            console.log(req.body.email);
+            const userEvents = await events.findOne({user:"test"});
+            if (!userEvents) throw Error("something went wrong");
+            console.log(userEvents);
+            console.log("____");
+            res.status(200).json(userEvents);
         } catch (err) {
             res.status(400).json({ msg: err });
         }

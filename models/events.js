@@ -36,6 +36,11 @@ const eventSchema = new schema({
         type: Number,
         required: false,
     },
+    user: {
+        type: String,
+        required: false,
+        default:"test",
+    },
 });
 
 module.exports = mongoose.model("events", eventSchema);
