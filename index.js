@@ -84,8 +84,7 @@ app.post("/api/deleteEvent", async (req, res) => {
         console.log("event");
         const event = await events.remove({_id: req.body.id});
         if (!event) throw Error("something went wrong");
-        console.log(event);
-        res.status(200).json(event);
+        res.status(200).json("ok");
     } catch (err) {
         res.status(400).json({ msg: err });
     }
@@ -96,8 +95,7 @@ app.post("/api/getUserEvents", async (req, res) => {
    // if (req.user) {
         try {
             console.log(req.body.email);
-            const userEvents = await events.findOne({user:"test"});
-            if (!userEvents) throw Error("something went wrong");
+            const userEvents = await events.findOne({user:req.body.email});
             console.log(userEvents);
             console.log("____");
             res.status(200).json(userEvents);
