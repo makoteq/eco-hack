@@ -5,20 +5,17 @@ function ShowPopup() {
   const [timedPopup, setTimedPopup] = useState(false);
 
   useEffect(() => {
-      setTimedPopup(true);
+    setTimedPopup(true);
   }, []);
 
   return (
     <div className="App">
       <Popup trigger={timedPopup} setTrigger={setTimedPopup}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          Ta platforma powstała na rzecz ochrony i ratowania środowiska naszej
+          planety oraz pokazanie, że akcje ekologiczne mogą być ciekawe i pewnym
+          sposobem rozrywki. Życzymy ci ciekawie spędzonego czasu na naszej
+          platformie i miłych wrażeń.
         </p>
       </Popup>
     </div>
