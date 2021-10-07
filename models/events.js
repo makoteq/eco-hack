@@ -39,7 +39,6 @@ const eventSchema = new schema({
     user: {
         type: String,
         required: false,
-        default:"test",
     },
 });
 

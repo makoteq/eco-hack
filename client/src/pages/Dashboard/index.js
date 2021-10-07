@@ -1,4 +1,4 @@
-// import styles from "./index.module.scss";
+import styles from "./index.module.scss";
 import { Stack } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
@@ -16,7 +16,7 @@ export const Dashboard = () => {
             if (data !== "not logged") {
                 API_CLIENT.getUserEvents(data.email).then((events) => {
                     if (events) {
-                        array.push(events);
+                        array = events;
                         console.log(array);
                         render();
                     }
@@ -51,6 +51,7 @@ export const Dashboard = () => {
     };
     return (
         <div className={container}>
+            <p className={styles.title}>Tu możesz zarządzać swoimi wydarzeniami</p>
             <Stack gap={1}>{list}</Stack>
         </div>
     );
