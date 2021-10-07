@@ -6,8 +6,11 @@ import { LOGIN_MANAGER } from "../../constants";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { LoginPanel } from "../LoginPanel";
 import { UserPanel } from "../UserPanel";
+import { useHistory } from "react-router";
 
 export const Navbar = () => {
+    const history = useHistory();
+
     return (
         <nav className={styles.nav}>
             <Link to="/" style={{ textDecoration: "none" }}>
@@ -19,7 +22,7 @@ export const Navbar = () => {
                     if (LOGIN_MANAGER.state) {
                         await spawnPopup(
                             (close) => {
-                                return <UserPanel close={close} />;
+                                return <UserPanel history={history} close={close} />;
                             },
                             { minWidth: "30vw" }
                         );
