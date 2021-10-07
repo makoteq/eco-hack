@@ -1,6 +1,5 @@
 import { APIClient } from "./utils/APIClient";
 import { LoginManager } from "./utils/LoginManager";
-require("dotenv").config();
 
 export const APP_NAME = "eco-meet";
 export const BACKEND_URL = "http://localhost:5000";
