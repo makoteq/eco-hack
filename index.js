@@ -91,10 +91,8 @@ app.post("/api/deleteEvent", async (req, res) => {
 });
 
 app.post("/api/getUserEvents", async (req, res) => {
-
-   // if (req.user) {
         try {
-            console.log(req.body.email);
+            console.log(req.user+"fweg");
             const userEvents = await events.findOne({user:req.body.email});
             console.log(userEvents);
             console.log("____");
@@ -102,9 +100,6 @@ app.post("/api/getUserEvents", async (req, res) => {
         } catch (err) {
             res.status(400).json({ msg: err });
         }
-   /* } else {
-        res.redirect('/login');
-    }*/
 });
 
 app.post("/api/createEvent", (req, res) => {
