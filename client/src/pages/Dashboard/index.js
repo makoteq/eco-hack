@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import { EventPreviewEdit } from "../../components/EventPreviewEdit";
+import { useHistory } from "react-router-dom";
 export const Dashboard = () => {
     const [list, updateList] = useState();
     let array = [];
+    const history = useHistory();
     useEffect(() => {
         //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
         API_CLIENT.isLogged().then((data) => {
@@ -19,6 +21,8 @@ export const Dashboard = () => {
                         render();
                     }
                 });
+            }else{
+                history.push("/");
             }
         });
         // eslint-disable-next-line
