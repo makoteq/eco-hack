@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import { EventPreviewEdit } from "../../components/EventPreviewEdit";
-import { useHistory } from "react-router-dom";
-import { LOGIN_MANAGER } from "../../constants";
 import { useHistory } from "react-router";
+import { LOGIN_MANAGER } from "../../constants";
 
 export const Dashboard = () => {
     if (LOGIN_MANAGER.state === null) {
