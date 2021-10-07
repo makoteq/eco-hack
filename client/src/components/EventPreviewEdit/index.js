@@ -2,7 +2,9 @@ import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import { EventType } from "../EventType";
 import { API_CLIENT } from "../../constants";
+import { useHistory } from "react-router-dom";
 export const EventPreviewEdit = (props) => {
+    const history = useHistory();
     const getDate = (time) => {
         let date = new Date(time);
         return date.toLocaleDateString(navigator.language);
@@ -17,6 +19,7 @@ export const EventPreviewEdit = (props) => {
     const deleteItem = (arg) => {
         console.log("deleting..." + arg);
         API_CLIENT.deleteEvent({ id: arg });
+        history.push("/");
     };
     return (
         <div className={styles.link}>

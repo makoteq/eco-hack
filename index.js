@@ -73,7 +73,6 @@ app.get("/api/getEvents", async (req, res) => {
     try {
         const event = await events.find();
         if (!event) throw Error("something went wrong");
-        console.log(event);
         res.status(200).json(event);
     } catch (err) {
         res.status(400).json({ msg: err });
@@ -81,21 +80,19 @@ app.get("/api/getEvents", async (req, res) => {
 });
 app.post("/api/deleteEvent", async (req, res) => {
     try {
-        console.log("event");
-        const event = await events.remove({_id: req.body.id});
+        const event = await events.deleteOne({_id: req.body.id});
         if (!event) throw Error("something went wrong");
         res.status(200).json("ok");
     } catch (err) {
         res.status(400).json({ msg: err });
+        
     }
 });
 
 app.post("/api/getUserEvents", async (req, res) => {
         try {
-            console.log(req.user+"fweg");
-            const userEvents = await events.findOne({user:req.body.email});
-            console.log(userEvents);
-            console.log("____");
+            const userEvents = await events.find({user:req.body.email});
+            console.log(userEvents)
             res.status(200).json(userEvents);
         } catch (err) {
             res.status(400).json({ msg: err });
@@ -105,6 +102,7 @@ app.post("/api/getUserEvents", async (req, res) => {
 app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
+        user:req.body.user,
         type: req.body.type,
         description: req.body.description,
         address: req.body.address,
