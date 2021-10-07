@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard";
-import { Users } from "./pages/Users";
 import { Credits } from "./pages/Credits";
 import { NotFound } from "./pages/NotFound";
 import { Navbar } from "./components/Navbar";
@@ -88,7 +87,6 @@ export const App = () => {
             <Switch>
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/credits" component={Credits} />
-                <Route exact path="/users" component={Users} />
                 <Route exact path="/">
                     <Home />
                 </Route>
