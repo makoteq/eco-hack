@@ -81,7 +81,8 @@ app.get("/api/getEvents", async (req, res) => {
 });
 app.post("/api/deleteEvent", async (req, res) => {
     try {
-        const event = await events.remove({id: req.body.id});
+        console.log("event");
+        const event = await events.remove({_id: req.body.id});
         if (!event) throw Error("something went wrong");
         console.log(event);
         res.status(200).json(event);
