@@ -3,52 +3,53 @@
 > Eco-Meet - _For the environment_.
 
 ## Table of Contents
-* [General Info](#general-information)
-* [Technologies Used](#technologies-used)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
 
+- [General Info](#general-information)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Usage](#usage)
+- [Project Status](#project-status)
+- [Room for Improvement](#room-for-improvement)
+- [Performance](#performance)
 
 ## General Information
+
 - The App was created for the mini Hackathon - edycja I organised by Nowa Akademia.
 - Eco-meet is a meeting platfrom designed to solve the environmental issue.
 - The purpose of our project is to have people cooperate for the sake of saving our planet.
 
 ## Technologies Used
+
 - React - version 17.0.2
 - MongoDB - version 4.1.2
 - Bootstrap - version 5.1.1
 - Express - version 4.17.1
 
-
 ## Features
+
 - Create custom environmental events the community can participate in.
 
-
 ## Screenshots
+
 ![image](https://user-images.githubusercontent.com/60068941/136275600-b5fb811b-68a8-41dd-a184-ee321f097de8.png)
 
-
-![unknown](https://user-images.githubusercontent.com/60068941/136443147-f20cc7ec-0b79-405d-989e-b579f95527ee.png)
-
-
 ## Usage
-Simply visit our internet website ecomeet.me and start saving our planet!
 
+Simply visit our internet website https://eco-hack.herokuapp.com/ and start saving our planet!
 
 ## Project Status:
-_in progress_
 
+_in progress_
 
 ## Room for Improvement
 
 Room for improvement:
-- UI 
+
+- UI
 
 To do:
+
 - feature to share images on the portal taken on the event.
 - tag feature for users who stand out in the community for they their effort put in saving our environment.
 - news feature to be able to track the environment status.
@@ -56,3 +57,6 @@ To do:
 - follow/liking system.
 - chatting feature.
 
+## Performance
+
+![unknown](https://user-images.githubusercontent.com/60068941/136443147-f20cc7ec-0b79-405d-989e-b579f95527ee.png)
