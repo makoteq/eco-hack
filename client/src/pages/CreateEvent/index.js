@@ -13,6 +13,9 @@ import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
 
 export const CreateEvent = () => {
+    if (LOGIN_MANAGER.state === null) {
+        history.push("/");
+    }
     useTitle("Tworzenie wydarzenia");
     const history = useHistory();
     const [locationText, setLocationText] = useState("Brak lokalizacji");

@@ -5,7 +5,13 @@ import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import { EventPreviewEdit } from "../../components/EventPreviewEdit";
 import { useHistory } from "react-router-dom";
+import { LOGIN_MANAGER } from "../../constants";
+import { useHistory } from "react-router";
+
 export const Dashboard = () => {
+    if (LOGIN_MANAGER.state === null) {
+        history.push("/");
+    }
     const [list, updateList] = useState();
     let array = [];
     const history = useHistory();
@@ -21,7 +27,7 @@ export const Dashboard = () => {
                         render();
                     }
                 });
-            }else{
+            } else {
                 history.push("/");
             }
         });
