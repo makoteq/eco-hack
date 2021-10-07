@@ -22,8 +22,6 @@ export const Home = () => {
                     return direction === "ascending" ? a.time - b.time : b.time - a.time;
                 case "creation-date":
                     return direction === "ascending" ? b.created.time - a.created.time : a.created.time - b.created.time;
-                case "alphabetic":
-                    return direction === "ascending" ? (a.name > b.name ? -1 : 1) : a.name > b.name ? 1 : -1;
                 case "distance":
                     if (userPos) {
                         const aDistance = a.lon && a.lat ? calculateDistance(userPos, [a.lon, a.lat]) : -1;
@@ -158,17 +156,15 @@ export const Home = () => {
             <Stack gap={1}>
                 <Stack gap={2} direction={"horizontal"} className={styles.sortDropdown}>
                     <p className={styles.label}>
-                        <BIcon icon="sort-down-alt" /> Sortuj według
+                        <BIcon icon="sort-down-alt" /> Sortuj
                     </p>
                     <select ref={sortDropdown} className={styles.sortDropdownMenu}>
-                        <option value="event-date:ascending">Data wydarzenia: od najwcześniejszych</option>
-                        <option value="event-date:descending">Data wydarzenia: od najpóźniejszych</option>
-                        <option value="creation-date:ascending">Data utworzenia: od najnowszych</option>
-                        <option value="creation-date:descending">Data utworzenia: od najstarszych</option>
-                        <option value="alphabetic:ascending">Alfabetycznie: A-Z</option>
-                        <option value="alphabetic:descending">Alfabetycznie: Z-A</option>
-                        <option value="distance:ascending">Odległość: najbliżej</option>
-                        <option value="distance:descending">Odległość: najdalej</option>
+                        <option value="event-date:ascending">Najnowsze</option>
+                        <option value="event-date:descending">Najstarsze</option>
+                        <option value="creation-date:ascending">Ostatnio utworzone</option>
+                        <option value="creation-date:descending">Najdłużej istniejące</option>
+                        <option value="distance:ascending">Najbliżej</option>
+                        <option value="distance:descending">Najdalej</option>
                     </select>
                     <button
                         ref={createEventButton}
