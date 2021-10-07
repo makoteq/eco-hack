@@ -13,8 +13,11 @@ import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
 
 export const CreateEvent = () => {
-    useTitle("Tworzenie wydarzenia");
     const history = useHistory();
+    if (LOGIN_MANAGER.state === null) {
+        history.push("/");
+    }
+    useTitle("Tworzenie wydarzenia");
     const [locationText, setLocationText] = useState("Brak lokalizacji");
     const formik = useFormik({
         initialValues: {
@@ -120,7 +123,7 @@ export const CreateEvent = () => {
                                             />
                                         );
                                     },
-                                    { width: "70vw", backgroundColor: "#CCCCCC" }
+                                    { width: "95vw", backgroundColor: "#CCCCCC" }
                                 );
                             }}
                         >

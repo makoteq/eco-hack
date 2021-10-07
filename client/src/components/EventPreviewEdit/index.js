@@ -2,9 +2,8 @@ import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import { EventType } from "../EventType";
 import { API_CLIENT } from "../../constants";
-import { useHistory } from "react-router-dom";
+
 export const EventPreviewEdit = (props) => {
-    const history = useHistory();
     const getDate = (time) => {
         let date = new Date(time);
         return date.toLocaleDateString(navigator.language);
@@ -17,7 +16,6 @@ export const EventPreviewEdit = (props) => {
         });
     };
     const deleteItem = async (arg) => {
-        console.log("deleting..." + arg);
         await API_CLIENT.deleteEvent({ id: arg });
     };
     return (

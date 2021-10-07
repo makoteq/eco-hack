@@ -50,7 +50,7 @@ export const MapPopup = (props) => {
                 }}
                 showMarker={true}
                 width="100%"
-                height="60vh"
+                height="85vh"
                 center={center}
                 zoom={zoom}
             ></Map>
