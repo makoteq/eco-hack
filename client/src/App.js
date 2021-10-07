@@ -25,6 +25,7 @@ export const App = () => {
                             lon: e.lon,
                             id: e._id,
                             createdTime: e.created?.time,
+                            user: e.user,
                         }}
                     ></Event>
                 </Route>
@@ -49,6 +50,7 @@ export const App = () => {
                                     lon: e.lon,
                                     id: e._id,
                                     createdTime: e.created.time,
+                                    user: e.user,
                                 }}
                             ></Event>
                         </Route>
@@ -72,6 +74,7 @@ export const App = () => {
                                     lon: e.lon,
                                     id: e._id,
                                     createdTime: e.created.time,
+                                    user: e.user,
                                 }}
                             ></Event>
                         </Route>

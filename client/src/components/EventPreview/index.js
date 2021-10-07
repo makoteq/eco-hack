@@ -29,7 +29,7 @@ export const EventPreview = (props) => {
                 <div className="d-flex justify-content-between align-items-center ">
                     <EventType type={props.data.type} />
                     <span className={styles.createdSpan}>
-                        utworzone {getDate(props.data.createdTime)} o godzinie {getTime(props.data.createdTime)}
+                        utworzone {getDate(props.data.createdTime)} o godzinie {getTime(props.data.createdTime)} przez {props.data.user}
                     </span>
                 </div>
             </div>
