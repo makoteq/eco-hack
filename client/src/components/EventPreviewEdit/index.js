@@ -19,7 +19,6 @@ export const EventPreviewEdit = (props) => {
     const deleteItem = async (arg) => {
         console.log("deleting..." + arg);
         await API_CLIENT.deleteEvent({ id: arg });
-        history.push("/");
     };
     return (
         <div className={styles.link}>
