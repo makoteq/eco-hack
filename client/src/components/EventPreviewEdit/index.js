@@ -16,10 +16,9 @@ export const EventPreviewEdit = (props) => {
             minute: "2-digit",
         });
     };
-    const deleteItem = (arg) => {
+    const deleteItem = async (arg) => {
         console.log("deleting..." + arg);
-        API_CLIENT.deleteEvent({ id: arg });
-        history.push("/");
+        await API_CLIENT.deleteEvent({ id: arg });
     };
     return (
         <div className={styles.link}>
@@ -33,12 +32,10 @@ export const EventPreviewEdit = (props) => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center ">
                     <span className={styles.time}>
-                        <BIcon icon="calendar" />
-                        {`${getDate(props.data.time)} ${getTime(props.data.time)}` ?? ""}
+                        <BIcon icon="calendar" /> {`${getDate(props.data.time)} ${getTime(props.data.time)}` ?? ""}
                     </span>
                     <span className={styles.location}>
-                        <BIcon icon="geo-alt-fill" />
-                        {props.data.address?.split(", ").splice(0, 2).join(", ")}
+                        <BIcon icon="geo-alt-fill" /> {props.data.address?.split(", ").splice(0, 2).join(", ")}
                     </span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center ">
