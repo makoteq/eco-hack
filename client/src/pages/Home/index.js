@@ -167,6 +167,7 @@ export const Home = () => {
                         <option value="distance:descending">Najdalej</option>
                     </select>
                     <button
+                        aria-label="Utwórz wydarzenie"
                         ref={createEventButton}
                         onClick={() => {
                             history.push("/create");

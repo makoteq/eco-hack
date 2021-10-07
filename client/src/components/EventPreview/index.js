@@ -15,7 +15,7 @@ export const EventPreview = (props) => {
         });
     };
     return (
-        <Link to={`/event/${props.data.id}`} className={styles.link}>
+        <Link aria-label={props.data.name ?? "Nazwa wydarzenia"} to={`/event/${props.data.id}`} className={styles.link}>
             <div className={styles.item}>
                 <span className={styles.name}>{props.data.name ?? "Event name"}</span> <br></br>
                 <div className="d-flex justify-content-between align-items-center ">

@@ -8,13 +8,14 @@ export const UserPanel = (props) => {
 
     return (
         <div className={styles.container}>
-            <button className={styles.closeBtn} onClick={props.close}>
+            <button aria-label="Zamknij" className={styles.closeBtn} onClick={props.close}>
                 <BIcon icon="x" size={"20px"} />
             </button>
             <h3>Zalogowano jako</h3>
             <h1>{LOGIN_MANAGER.state.email ?? "Nieznany użytkownik"}</h1>
             <Stack gap={2}>
                 <button
+                    aria-label="Wyloguj się"
                     onClick={async () => {
                         await LOGIN_MANAGER.logout();
                         props.close();
@@ -24,6 +25,7 @@ export const UserPanel = (props) => {
                     <BIcon icon="box-arrow-right" /> Wyloguj się
                 </button>
                 <button
+                    aria-label="Dashboard"
                     onClick={() => {
                         props.history?.push("/dashboard");
                         props.close();

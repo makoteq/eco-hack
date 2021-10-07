@@ -82,6 +82,7 @@ export const CreateEvent = () => {
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
                         {locationText !== "Brak lokalizacji" && (
                             <button
+                                aria-label="Usuń lokalizację"
                                 className={styles.redButton}
                                 type="button"
                                 onClick={() => {
@@ -93,6 +94,7 @@ export const CreateEvent = () => {
                             </button>
                         )}
                         <button
+                            aria-label="Wybierz lokalizację"
                             type="button"
                             style={{ width: "30%" }}
                             onClick={() => {
@@ -128,7 +130,7 @@ export const CreateEvent = () => {
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
                         <input onChange={formik.handleChange} type="time" id="time" style={{ width: "50%" }} />
                     </Stack>
-                    <button type="submit" className={"greenButton"}>
+                    <button aria-label="Utwórz wydarzenie" type="submit" className={"greenButton"}>
                         Utwórz wydarzenie
                     </button>
                 </Stack>
