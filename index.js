@@ -79,12 +79,22 @@ app.get("/api/getEvents", async (req, res) => {
         res.status(400).json({ msg: err });
     }
 });
+app.post("/api/deleteEvent", async (req, res) => {
+    try {
+        const event = await events.remove({id: req.body.id});
+        if (!event) throw Error("something went wrong");
+        console.log(event);
+        res.status(200).json(event);
+    } catch (err) {
+        res.status(400).json({ msg: err });
+    }
+});
 
 app.post("/api/getUserEvents", async (req, res) => {
    // if (req.user) {
         try {
-            const user = await users.findOne({email:req.body.email});
-            console.log(req.body.email);
+            const user = await events.findOne({user:req.body.email});
+            console.log(user);
             if (!user) throw Error("something went wrong");
             res.status(200).json(user);
         } catch (err) {

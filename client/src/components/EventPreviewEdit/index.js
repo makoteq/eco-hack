@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import { EventType } from "../EventType";
+import { API_CLIENT } from "../../constants";
 export const EventPreviewEdit = (props) => {
   const getDate = (time) => {
     let date = new Date(time);
@@ -14,6 +15,9 @@ export const EventPreviewEdit = (props) => {
       minute: "2-digit",
     });
   };
+  const deleteItem = (arg) => {
+    API_CLIENT.getUserEvents({id:arg});
+  };
   return (
     <div  className={styles.link}>
       <div className={styles.item}>
@@ -23,9 +27,8 @@ export const EventPreviewEdit = (props) => {
             {props.data.name ?? "Event name"}
           </span>
           <br></br>
-          <span className={styles.trash}>
+          <span onClick={deleteItem(props.data._id)} className={styles.trash}>
             <BIcon icon="trash" />
-            {props.data.address?.split(", ").splice(0, 2).join(", ")}
           </span>
         </div>
         <div className="d-flex justify-content-between align-items-center ">

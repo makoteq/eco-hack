@@ -1,17 +1,26 @@
 import styles from "./index.module.scss";
 import { Stack } from "react-bootstrap";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import { EventPreviewEdit } from "../../components/EventPreviewEdit";
 import { LOGIN_MANAGER } from "../../constants";
 export const Dashboard = () => {
-    useEffect(() => {
-        //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
-        console.log(API_CLIENT.getUserEvents({email:"test@gmail.com"}).then((d) => {console.log(d)}))
-    }, []);
-  const [list, updateList] = useState(
-    ['o','i'].map((e, i) => {
+  const [list, updateList] = useState();
+  let array = [];
+  useEffect(() => {
+
+    //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
+    API_CLIENT.getUserEvents("87").then((events) => {
+      array.push(events);
+      console.log(array); 
+      render();
+    });
+  }, []);
+  
+const render = () => {
+  updateList(
+    array.map((e, i) => {
       return (
         <EventPreviewEdit
           data={{
@@ -29,5 +38,11 @@ export const Dashboard = () => {
       );
     })
   );
-  return  <div className={container}>  <Stack gap={1}>{list}</Stack></div>;
+}
+  return (
+    <div className={container}>
+      {" "}
+      <Stack gap={1}>{list}</Stack>
+    </div>
+  );
 };

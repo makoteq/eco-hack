@@ -22,11 +22,16 @@ export class APIClient extends EventEmitter {
         this.emit("EVENT_RELOAD", this.#events, rq.data);
         return rq.data;
     }
-    async getUserEvents(data) {
-        console.log(data);
-        const rq = await axios.post(`${this.#dbUrl}/api/getUserEvents`, data);
-        console.log(rq);
+    async deleteEvent(item) {
+        const rq = await axios.post(`${this.#dbUrl}/api/getEvents`,item);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        return rq.data;
+    }
+    async getUserEvents(data) {
+
+        const rq = await axios.post(`${this.#dbUrl}/api/getUserEvents`, {email:data});
+        if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
+        console.log(rq.data);
         return rq.data;
     }
 
