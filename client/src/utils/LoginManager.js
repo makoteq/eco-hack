@@ -38,9 +38,10 @@ export class LoginManager extends EventEmitter {
     async fetchSession() {
         const rq = await axios.get(`${this.#dbUrl}/api/isLogged`);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        if(rq.data!="not logged")
-      {  this.#loginState = rq.data ?? null;
-        this.emit("STATE_CHANGE", this.#loginState);
-        return rq.data ?? null;}
+        if (rq.data !== "not logged") {
+            this.#loginState = rq.data ?? null;
+            this.emit("STATE_CHANGE", this.#loginState);
+            return rq.data ?? null;
+        }
     }
 }
