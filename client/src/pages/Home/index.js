@@ -99,7 +99,17 @@ export const Home = () => {
             const pos = type === "distance" ? await getPos() : null;
             if (type === "distance" && !pos) {
                 sortDropdown.current.value = list.sortingMode;
-                window.localStorage.setItem("sorting", list.sortingMode);
+                updateList({
+                    sortingMode: list.sortingMode,
+                    elements: events.sort(sortingFn(pos)).map((e, i) => {
+                        return (
+                            <EventPreview
+                                data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                                key={i}
+                            />
+                        );
+                    }),
+                });
                 return;
             }
             updateList({
