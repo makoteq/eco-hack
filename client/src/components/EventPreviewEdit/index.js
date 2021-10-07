@@ -16,9 +16,9 @@ export const EventPreviewEdit = (props) => {
             minute: "2-digit",
         });
     };
-    const deleteItem = (arg) => {
+    const deleteItem = async (arg) => {
         console.log("deleting..." + arg);
-        API_CLIENT.deleteEvent({ id: arg });
+        await API_CLIENT.deleteEvent({ id: arg });
         history.push("/");
     };
     return (
