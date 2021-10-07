@@ -179,10 +179,10 @@ export const Home = () => {
                         <BIcon icon="sort-down-alt" /> Sortuj
                     </p>
                     <select ref={sortDropdown} className={styles.sortDropdownMenu}>
-                        <option value="event-date:ascending">Najnowsze</option>
-                        <option value="event-date:descending">Najstarsze</option>
-                        <option value="creation-date:ascending">Ostatnio utworzone</option>
-                        <option value="creation-date:descending">Najdłużej istniejące</option>
+                        <option value="event-date:ascending">Nadzchodzące</option>
+                        <option value="event-date:descending">Najpóźniejsze</option>
+                        <option value="creation-date:ascending">Najnowsze</option>
+                        <option value="creation-date:descending">Najstarsze</option>
                         <option value="distance:ascending">Najbliżej</option>
                         <option value="distance:descending">Najdalej</option>
                     </select>
