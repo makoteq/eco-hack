@@ -5,6 +5,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Credits } from "./pages/Credits";
 import { NotFound } from "./pages/NotFound";
 import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Event } from "./pages/Event";
 import { API_CLIENT } from "./constants";
@@ -97,6 +98,7 @@ export const App = () => {
                 {routes}
                 <Route component={NotFound} />
             </Switch>
+            <Footer/>
         </Router>
     );
 };
