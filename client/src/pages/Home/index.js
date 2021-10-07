@@ -178,7 +178,7 @@ export const Home = () => {
                         className={styles.create}
                     >
                         <BIcon icon="plus" />
-                        Utwórz wydarzenie
+                        Utwórz
                     </button>
                 </Stack>
                 {list.elements}
