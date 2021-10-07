@@ -1,4 +1,5 @@
 import styles from "./index.module.scss";
+import { useRef } from "react";
 import { Stack } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
@@ -8,12 +9,12 @@ import { useHistory } from "react-router";
 import { LOGIN_MANAGER } from "../../constants";
 
 export const Dashboard = () => {
+    const history = useHistory();
     if (LOGIN_MANAGER.state === null) {
         history.push("/");
     }
     const [list, updateList] = useState();
-    let array = [];
-    const history = useHistory();
+    const array = useRef([]);
     useEffect(() => {
         //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
         API_CLIENT.isLogged().then((data) => {
@@ -21,7 +22,7 @@ export const Dashboard = () => {
             if (data !== "not logged") {
                 API_CLIENT.getUserEvents(data.email).then((events) => {
                     if (events) {
-                        array = events;
+                        array.current = events;
                         console.log(array);
                         render();
                     }
