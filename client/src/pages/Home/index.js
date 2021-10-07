@@ -162,7 +162,7 @@ export const Home = () => {
                         <option value="event-date:ascending">Najnowsze</option>
                         <option value="event-date:descending">Najstarsze</option>
                         <option value="creation-date:ascending">Ostatnio utworzone</option>
-                        <option value="creation-date:descending">Najpóźniej utworzone</option>
+                        <option value="creation-date:descending">Najdłużej istniejące</option>
                         <option value="distance:ascending">Najbliżej</option>
                         <option value="distance:descending">Najdalej</option>
                     </select>
