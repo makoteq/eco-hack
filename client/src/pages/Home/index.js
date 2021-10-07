@@ -69,7 +69,7 @@ export const Home = () => {
             elements: list.sort(sortingFn(list.sortingMode.split(":")[0] === "distance" ? await getPos() : null)).map((e, i) => {
                 return (
                     <EventPreview
-                        data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                        data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address, user: e.user }}
                         key={i}
                     />
                 );
@@ -102,7 +102,17 @@ export const Home = () => {
                     elements: events.sort(sortingFn(pos)).map((e, i) => {
                         return (
                             <EventPreview
-                                data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                                data={{
+                                    name: e.name,
+                                    type: e.type,
+                                    lon: e.lon,
+                                    lat: e.lat,
+                                    createdTime: e.created?.time,
+                                    time: e.time,
+                                    id: e._id,
+                                    address: e.address,
+                                    user: e.user,
+                                }}
                                 key={i}
                             />
                         );
@@ -115,7 +125,7 @@ export const Home = () => {
                 elements: events.sort(sortingFn(pos, e.target.value)).map((e, i) => {
                     return (
                         <EventPreview
-                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                            data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address, user: e.user }}
                             key={i}
                         />
                     );
@@ -130,7 +140,17 @@ export const Home = () => {
                       elements: events.sort(sortingFn(pos)).map((e, i) => {
                           return (
                               <EventPreview
-                                  data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                                  data={{
+                                      name: e.name,
+                                      type: e.type,
+                                      lon: e.lon,
+                                      lat: e.lat,
+                                      createdTime: e.created?.time,
+                                      time: e.time,
+                                      id: e._id,
+                                      address: e.address,
+                                      user: e.user,
+                                  }}
                                   key={i}
                               />
                           );
@@ -142,7 +162,7 @@ export const Home = () => {
                   elements: events.sort(sortingFn(null)).map((e, i) => {
                       return (
                           <EventPreview
-                              data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address }}
+                              data={{ name: e.name, type: e.type, lon: e.lon, lat: e.lat, createdTime: e.created?.time, time: e.time, id: e._id, address: e.address, user: e.user }}
                               key={i}
                           />
                       );
@@ -167,6 +187,7 @@ export const Home = () => {
                         <option value="distance:descending">Najdalej</option>
                     </select>
                     <button
+                        aria-label="Utwórz wydarzenie"
                         ref={createEventButton}
                         onClick={() => {
                             history.push("/create");

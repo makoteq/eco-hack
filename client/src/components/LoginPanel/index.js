@@ -27,7 +27,7 @@ export const LoginPanel = (props) => {
     return (
         <>
             <div className={container}>
-                <button className={styles.closeBtn} onClick={props.close}>
+                <button className={styles.closeBtn} aria-label="Zamknij" onClick={props.close}>
                     <BIcon icon="x" size={"20px"} />
                 </button>
                 <p className={styles.title}>Zaloguj się</p>
@@ -35,7 +35,7 @@ export const LoginPanel = (props) => {
                     <Stack gap={2}>
                         <input type="text" autoComplete={"username"} placeholder="Nazwa użytkownika"></input>
                         <input type="password" autoComplete={"current-password"} placeholder="Hasło"></input>
-                        <button type="submit" className={"greenButton"}>
+                        <button type="submit" aria-label="Zaloguj się" className={"greenButton"}>
                             Zaloguj się
                         </button>
                     </Stack>

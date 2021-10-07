@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
-import { API_CLIENT } from "../../constants";
+import { API_CLIENT, LOGIN_MANAGER } from "../../constants";
 import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
@@ -50,6 +50,7 @@ export const CreateEvent = () => {
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
                 time: date.getTime(),
+                user: LOGIN_MANAGER.state.email,
             };
             API_CLIENT.createEvent(rqObj)
                 .then(() => {
@@ -82,6 +83,7 @@ export const CreateEvent = () => {
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
                         {locationText !== "Brak lokalizacji" && (
                             <button
+                                aria-label="Usuń lokalizację"
                                 className={styles.redButton}
                                 type="button"
                                 onClick={() => {
@@ -93,6 +95,7 @@ export const CreateEvent = () => {
                             </button>
                         )}
                         <button
+                            aria-label="Wybierz lokalizację"
                             type="button"
                             style={{ width: "30%" }}
                             onClick={() => {
@@ -128,7 +131,7 @@ export const CreateEvent = () => {
                         <input onChange={formik.handleChange} type="date" id="date" style={{ width: "50%" }} />
                         <input onChange={formik.handleChange} type="time" id="time" style={{ width: "50%" }} />
                     </Stack>
-                    <button type="submit" className={"greenButton"}>
+                    <button aria-label="Utwórz wydarzenie" type="submit" className={"greenButton"}>
                         Utwórz wydarzenie
                     </button>
                 </Stack>

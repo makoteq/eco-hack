@@ -20,6 +20,7 @@ export const Event = (props) => {
                 </span>
                 {data.address && data.address !== "Brak lokalizacji" && <EventField icon="geo-alt-fill" content={data.address} />}
                 <EventField icon="calendar3" content={new Date(data.time).toLocaleString(navigator.language, { dateStyle: "full", timeStyle: "short" })} />
+                <EventField icon="person" content={`Utworzone przez: ${data.user}`} />
                 {data.lon && data.lat && <Map blockInteraction={true} width={"100%"} height={"500px"} showMarker={true} zoom={15} center={fromLonLat([data.lon, data.lat])} />}
                 {data.description && <p className={styles.description}>{data.description}</p>}
             </Stack>
