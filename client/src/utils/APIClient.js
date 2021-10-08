@@ -1,11 +1,9 @@
 import axios from "axios";
-import { EventEmitter } from "events";
 
-export class APIClient extends EventEmitter {
+export class APIClient {
     #dbUrl = "";
 
     constructor(dbUrl) {
-        super();
         if (typeof dbUrl !== "string") throw new Error("Database URL is not a string");
         this.#dbUrl = dbUrl;
     }
