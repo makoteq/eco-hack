@@ -1,3 +1,4 @@
+import styles from "./map.module.scss";
 import { useState, useRef } from "react";
 import { BIcon } from "../../components/BIcon";
 import { Map } from "../../components/Map";
@@ -13,8 +14,8 @@ export const MapPopup = (props) => {
     let centerLive = center;
 
     return (
-        <Stack gap={2}>
-            <Stack direction="horizontal" gap={2}>
+        <div className={styles.container}>
+            <Stack style={{ flex: 1 }} className={styles.addressBar} direction="horizontal" gap={2}>
                 <input
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -24,14 +25,14 @@ export const MapPopup = (props) => {
                     }}
                     placeholder="Wyszukaj adres..."
                     autoComplete={"street-address"}
-                    style={{ width: "92%" }}
+                    style={{ flex: 9.5 }}
                     type="text"
                     ref={mapSearchBox}
                 />
                 <button
                     ref={mapSearchBtn}
                     type="button"
-                    style={{ width: "8%" }}
+                    style={{ flex: 0.5 }}
                     onClick={async () => {
                         const value = mapSearchBox.current.value;
                         const results = await searchLocation(value);
@@ -41,7 +42,7 @@ export const MapPopup = (props) => {
                         }
                     }}
                 >
-                    <BIcon icon="search" /> Szukaj
+                    <BIcon icon="search" />
                 </button>
             </Stack>
             <Map
@@ -50,11 +51,11 @@ export const MapPopup = (props) => {
                 }}
                 showMarker={true}
                 width="100%"
-                height="85vh"
+                height="75vh"
                 center={center}
                 zoom={zoom}
             ></Map>
-            <Stack gap={2} direction="horizontal">
+            <Stack style={{ flex: 1 }} gap={2} direction="horizontal">
                 <button
                     onClick={() => {
                         setCenter(centerLive);
@@ -69,6 +70,6 @@ export const MapPopup = (props) => {
                     Anuluj
                 </button>
             </Stack>
-        </Stack>
+        </div>
     );
 };
