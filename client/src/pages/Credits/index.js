@@ -4,10 +4,11 @@ import { ReactComponent as Person } from "../../assets/person.svg";
 import { ReactComponent as Person1 } from "../../assets/person1.svg";
 import { ReactComponent as Person2 } from "../../assets/person2.svg";
 import "./index.scss";
-
+import { container } from "../../global.module.scss";
 export const Credits = () => {
   return (
     //Icons
+    <div className={container}>
     <div className="credits">
       <div className="credits__team">
         <h6>THE ECO-MEET TEAM</h6>
@@ -44,5 +45,5 @@ export const Credits = () => {
         </a>
       </div>
     </div>
-  );
+    </div>);
 };
