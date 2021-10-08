@@ -2,9 +2,10 @@ import styles from "./index.module.scss";
 import { LOGIN_MANAGER } from "../../constants";
 import { BIcon } from "../BIcon";
 import { Stack } from "react-bootstrap";
+import { updateLogin } from "../../context/Login";
 
 export const UserPanel = (props) => {
-    if (!LOGIN_MANAGER.state) props.close();
+    if (!props.state) props.close();
 
     return (
         <div className={styles.container}>
@@ -12,7 +13,7 @@ export const UserPanel = (props) => {
                 <BIcon icon="x" size={"20px"} />
             </button>
             <h3>Zalogowano jako</h3>
-            <h1>{LOGIN_MANAGER.state.email ?? "Nieznany użytkownik"}</h1>
+            <h1>{props.state.email ?? "Nieznany użytkownik"}</h1>
             <Stack gap={2}>
                 <button
                     aria-label="Dashboard"
@@ -27,6 +28,8 @@ export const UserPanel = (props) => {
                     aria-label="Wyloguj się"
                     onClick={async () => {
                         await LOGIN_MANAGER.logout();
+                        updateLogin(null);
+                        props.history?.push("/");
                         props.close();
                     }}
                     className={styles.logoutBtn}

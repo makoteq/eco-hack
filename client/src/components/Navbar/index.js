@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import title from "../../assets/title.svg";
-import { LOGIN_MANAGER } from "../../constants";
+import { useLogin } from "../../context/Login";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { LoginPanel } from "../LoginPanel";
 import { UserPanel } from "../UserPanel";
@@ -10,6 +10,7 @@ import { useHistory } from "react-router";
 
 export const Navbar = () => {
     const history = useHistory();
+    const login = useLogin();
 
     return (
         <nav className={styles.nav}>
@@ -20,10 +21,10 @@ export const Navbar = () => {
                 aria-label="Zarządzanie kontem"
                 className={styles.navBtn}
                 onClick={async () => {
-                    if (LOGIN_MANAGER.state) {
+                    if (login) {
                         await spawnPopup(
                             (close) => {
-                                return <UserPanel history={history} close={close} />;
+                                return <UserPanel state={login} history={history} close={close} />;
                             },
                             { minWidth: "30vw" }
                         );

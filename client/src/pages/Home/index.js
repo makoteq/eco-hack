@@ -10,11 +10,12 @@ import { useHistory } from "react-router";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { spawnError } from "../../utils/popups/spawnError";
 import { getUserPos } from "../../utils/getUserPos";
-import { useLoginState } from "../../utils/useLoginState";
 import { useEvents } from "../../context/Events";
+import { useLogin } from "../../context/Login";
 
 export const Home = () => {
     const events = useEvents();
+    const login = useLogin();
     const history = useHistory();
     const sortDropdown = useRef(null);
     const createEventButton = useRef(null);
@@ -56,10 +57,9 @@ export const Home = () => {
             el.removeEventListener("input", cb);
         };
     }, [events, list]);
-
-    useLoginState((state) => {
-        if (createEventButton.current) createEventButton.current.disabled = state === null;
-    });
+    useEffect(() => {
+        createEventButton.current.disabled = !login;
+    }, [createEventButton, login]);
 
     return (
         <div className={container}>
