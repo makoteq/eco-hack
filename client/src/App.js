@@ -41,16 +41,18 @@ export const App = () => {
     return (
         <Router>
             <Navbar />
-            <Switch>
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/credits" component={Credits} />
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route exact path="/create" component={CreateEvent} />
-                {routes}
-                <Route component={NotFound} />
-            </Switch>
+            <div style={{ minHeight: "88vh" }}>
+                <Switch>
+                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/credits" component={Credits} />
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route exact path="/create" component={CreateEvent} />
+                    {routes}
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
             <Footer />
         </Router>
     );

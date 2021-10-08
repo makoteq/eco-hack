@@ -5,7 +5,7 @@ export const Footer = () => {
     return (
         <div className={styles.footer}>
             <Link aria-label="Credits" to="/credits" style={{ textDecoration: "none" }}>
-                <span className={styles.txt}>credits</span>
+                <span className={styles.txt}>Credits</span>
             </Link>
         </div>
     );

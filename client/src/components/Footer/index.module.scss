@@ -1,15 +1,17 @@
 @import "../../index.scss";
-.footer{
-    text-align:right;
-    width: 100%;;
-    height: 4vh;
+
+.footer {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin: 5px 0;
 }
-.txt{
-    color:rgba(0, 0, 0, 0.70);
-    margin-right: 4vw;
-    font-size: 1.2em;
-    cursor:pointer;
-    &:hover{
-        color:black;
+.txt {
+    color: rgb(100, 100, 100);
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    &:hover {
+        color: black;
     }
 }
