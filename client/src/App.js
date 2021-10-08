@@ -41,7 +41,7 @@ export const App = () => {
     return (
         <Router>
             <Navbar />
-            <div style={{ minHeight: "88vh" }}>
+            <div style={{ minHeight: "calc(100vh - 120px)" }}>
                 <Switch>
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/credits" component={Credits} />
