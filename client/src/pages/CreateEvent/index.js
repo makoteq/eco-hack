@@ -77,8 +77,8 @@ export const CreateEvent = () => {
                         <option hidden disabled value={0}>
                             Wybierz typ wydarzenia
                         </option>
-                        <option value={1}>Sprzątanie świata</option>
-                        <option value={2}>Sadzenie drzew</option>
+                        <option value={1}>Sadzenie drzew</option>
+                        <option value={2}>Sprzątanie świata</option>
                         <option value={3}>Happening/meeting</option>
                         <option value={4}>Inne</option>
                     </select>
