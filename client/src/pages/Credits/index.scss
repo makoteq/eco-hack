@@ -1,35 +1,35 @@
 .credits {
-  padding: 32;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh;
-  color: darkgrey;
-  a {
-    text-decoration: none;
-    color: rgb(131, 131, 131);
-  }
-  a:hover {
-    color: rgb(131, 131, 131);
-  }
+    padding: 32;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: darkgrey;
+    a {
+        text-decoration: none;
+        color: rgb(131, 131, 131);
+    }
+    a:hover {
+        color: rgb(131, 131, 131);
+    }
 }
 .credits__icon {
-  padding: 10px;
-  margin: auto;
-  width: 400px;
-  border-width: 5px;
-  font-size: 10px;
-  text-align: center;
+    margin: 5px 0;
+    width: 400px;
+    border-width: 5px;
+    font-size: 10px;
+    text-align: center;
 }
 .credits__team {
-  height: 300px;
-  margin: auto;
-  a {
-    color: rgb(148, 200, 113);
-    text-decoration: none;
-  }
-  a:hover {
-    color: rgb(71, 71, 71);
-  }
+    height: 300px;
+    margin: auto;
+    a {
+        color: #53d188;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: rgb(71, 71, 71);
+    }
 }
