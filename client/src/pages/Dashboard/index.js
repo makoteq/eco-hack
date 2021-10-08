@@ -35,8 +35,9 @@ export const Dashboard = () => {
     }, []);
 
     const render = () => {
+        if (!Array.isArray(array)) return;
         updateList(
-            array?.map((e, i) => {
+            array.map((e, i) => {
                 return (
                     <EventPreviewEdit
                         data={{
