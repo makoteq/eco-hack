@@ -11,6 +11,7 @@ import { spawnPopup } from "../../utils/popups/spawnPopup";
 import { spawnError } from "../../utils/popups/spawnError";
 import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
+import { addEvent } from "../../context/Events";
 
 export const CreateEvent = () => {
     const history = useHistory();
@@ -56,7 +57,8 @@ export const CreateEvent = () => {
                 user: LOGIN_MANAGER.state.email,
             };
             API_CLIENT.createEvent(rqObj)
-                .then(() => {
+                .then((res) => {
+                    addEvent(res);
                     history.push("/");
                 })
                 .catch(async (e) => {

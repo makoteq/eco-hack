@@ -1,5 +1,4 @@
 import styles from "./index.module.scss";
-import { useRef } from "react";
 import { Stack } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API_CLIENT } from "../../constants";
@@ -13,8 +12,7 @@ export const Dashboard = () => {
     if (LOGIN_MANAGER.state === null) {
         history.push("/");
     }
-    const [list, updateList] = useState();
-    const array = useRef([]);
+    const [list, updateList] = useState([]);
     useEffect(() => {
         //chce wyrenderować eventpreview ale tylko dla eventów utworzonych przez danego użytkownika
         API_CLIENT.isLogged().then((data) => {
@@ -22,44 +20,45 @@ export const Dashboard = () => {
             if (data !== "not logged") {
                 API_CLIENT.getUserEvents(data.email).then((events) => {
                     if (events) {
-                        array.current = events;
-                        console.log(array);
-                        render();
+                        updateList(events);
                     }
                 });
             } else {
                 history.push("/");
             }
         });
-        // eslint-disable-next-line
-    }, []);
+    }, [history]);
 
-    const render = () => {
-        if (!Array.isArray(array)) return;
-        updateList(
-            array.map((e, i) => {
-                return (
-                    <EventPreviewEdit
-                        data={{
-                            name: e.name,
-                            type: e.type,
-                            lon: e.lon,
-                            lat: e.lat,
-                            createdTime: e.created?.time,
-                            time: e.time,
-                            id: e._id,
-                            address: e.address,
-                        }}
-                        key={i}
-                    />
-                );
-            })
-        );
-    };
     return (
         <div className={container}>
             <p className={styles.title}>Tu możesz zarządzać swoimi wydarzeniami</p>
-            <Stack gap={1}>{list}</Stack>
+            <Stack gap={1}>
+                {list.map((e, i) => {
+                    return (
+                        <EventPreviewEdit
+                            onRemove={(id) => {
+                                const newList = list;
+                                const index = newList.findIndex((el) => id === el._id);
+                                if (index !== -1) {
+                                    newList.splice(index, 1);
+                                    updateList(newList);
+                                }
+                            }}
+                            data={{
+                                name: e.name,
+                                type: e.type,
+                                lon: e.lon,
+                                lat: e.lat,
+                                createdTime: e.created?.time,
+                                time: e.time,
+                                id: e._id,
+                                address: e.address,
+                            }}
+                            key={i}
+                        />
+                    );
+                })}
+            </Stack>
         </div>
     );
 };

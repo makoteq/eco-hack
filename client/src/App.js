@@ -8,82 +8,35 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Event } from "./pages/Event";
-import { API_CLIENT } from "./constants";
+import { useEvents } from "./context/Events";
 
 export const App = () => {
-    const [routes, setRoutes] = useState(
-        API_CLIENT.events.map((e) => {
-            return (
-                <Route key={e._id} exact path={`/event/${e._id}`}>
-                    <Event
-                        data={{
-                            name: e.name,
-                            type: e.type,
-                            description: e.description,
-                            address: e.address,
-                            time: e.time,
-                            lat: e.lat,
-                            lon: e.lon,
-                            id: e._id,
-                            createdTime: e.created?.time,
-                            user: e.user,
-                        }}
-                    ></Event>
-                </Route>
-            );
-        })
-    );
-
+    const events = useEvents();
+    const [routes, setRoutes] = useState([]);
     useEffect(() => {
-        API_CLIENT.on("EVENT_RELOAD", (list) => {
-            setRoutes(
-                list.map((e) => {
-                    return (
-                        <Route key={e._id} exact path={`/event/${e._id}`}>
-                            <Event
-                                data={{
-                                    name: e.name,
-                                    type: e.type,
-                                    description: e.description,
-                                    address: e.address,
-                                    time: e.time,
-                                    lat: e.lat,
-                                    lon: e.lon,
-                                    id: e._id,
-                                    createdTime: e.created.time,
-                                    user: e.user,
-                                }}
-                            ></Event>
-                        </Route>
-                    );
-                })
-            );
-        });
-        API_CLIENT.on("EVENT_CREATE", (list) => {
-            setRoutes(
-                list.map((e) => {
-                    return (
-                        <Route key={e._id} exact path={`/event/${e._id}`}>
-                            <Event
-                                data={{
-                                    name: e.name,
-                                    type: e.type,
-                                    description: e.description,
-                                    address: e.address,
-                                    time: e.time,
-                                    lat: e.lat,
-                                    lon: e.lon,
-                                    id: e._id,
-                                    createdTime: e.created.time,
-                                    user: e.user,
-                                }}
-                            ></Event>
-                        </Route>
-                    );
-                })
-            );
-        });
-    }, []);
+        setRoutes(
+            events.map((e) => {
+                return (
+                    <Route key={e._id} exact path={`/event/${e._id}`}>
+                        <Event
+                            data={{
+                                name: e.name,
+                                type: e.type,
+                                description: e.description,
+                                address: e.address,
+                                time: e.time,
+                                lat: e.lat,
+                                lon: e.lon,
+                                id: e._id,
+                                createdTime: e.created?.time,
+                                user: e.user,
+                            }}
+                        ></Event>
+                    </Route>
+                );
+            })
+        );
+    }, [events]);
 
     return (
         <Router>
@@ -98,7 +51,7 @@ export const App = () => {
                 {routes}
                 <Route component={NotFound} />
             </Switch>
-            <Footer/>
+            <Footer />
         </Router>
     );
 };

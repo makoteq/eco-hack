@@ -2,6 +2,7 @@ import { BIcon } from "../BIcon";
 import styles from "./index.module.scss";
 import { EventType } from "../EventType";
 import { API_CLIENT } from "../../constants";
+import { removeEvent } from "../../context/Events";
 
 export const EventPreviewEdit = (props) => {
     const getDate = (time) => {
@@ -15,8 +16,11 @@ export const EventPreviewEdit = (props) => {
             minute: "2-digit",
         });
     };
-    const deleteItem = async (arg) => {
-        await API_CLIENT.deleteEvent({ id: arg });
+    const deleteItem = (arg) => {
+        API_CLIENT.deleteEvent({ id: arg }).then(() => {
+            removeEvent(arg);
+            typeof props.onRemove === "function" && props.onRemove(arg);
+        });
     };
     return (
         <div className={styles.link}>

@@ -4,14 +4,17 @@ import "./index.scss";
 import { App } from "./App.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { API_CLIENT, LOGIN_MANAGER } from "./constants";
+import { Events } from "./context/Events";
 
 (async () => {
-    await API_CLIENT.fetchEvents();
+    const events = await API_CLIENT.fetchEvents();
     await LOGIN_MANAGER.fetchSession();
 
     ReactDOM.render(
         <React.StrictMode>
-            <App />
+            <Events initial={events}>
+                <App />
+            </Events>
         </React.StrictMode>,
         document.getElementById("root")
     );

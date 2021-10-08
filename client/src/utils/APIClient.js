@@ -3,7 +3,6 @@ import { EventEmitter } from "events";
 
 export class APIClient extends EventEmitter {
     #dbUrl = "";
-    #events = [];
 
     constructor(dbUrl) {
         super();
@@ -11,15 +10,9 @@ export class APIClient extends EventEmitter {
         this.#dbUrl = dbUrl;
     }
 
-    get events() {
-        return this.#events;
-    }
-
     async fetchEvents() {
         const rq = await axios.get(`${this.#dbUrl}/api/getEvents`);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        this.#events = rq.data;
-        this.emit("EVENT_RELOAD", this.#events, rq.data);
         return rq.data;
     }
 
@@ -27,7 +20,7 @@ export class APIClient extends EventEmitter {
         const rq = await axios.post(`${this.#dbUrl}/api/deleteEvent`, item);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
         await this.fetchEvents();
-        return rq.data;
+        return item.id;
     }
 
     async getUserEvents(data) {
@@ -43,11 +36,6 @@ export class APIClient extends EventEmitter {
         return rq.data;
     }
 
-    async getEvent(id) {
-        if (typeof id !== "string") throw new TypeError("Invalid ID type");
-        return this.#events.find((e) => e.id === id) ?? null;
-    }
-
     async createEvent(data) {
         //Check types
         if (typeof data !== "object") throw new TypeError("Data object is required");
@@ -58,8 +46,6 @@ export class APIClient extends EventEmitter {
         //Make POST request
         const rq = await axios.post(`${this.#dbUrl}/api/createEvent`, data);
         if (rq.status !== 200) throw new Error(`Request failed with status code ${rq.status}: ${rq.statusText}`);
-        this.#events.push(rq.data);
-        this.emit("EVENT_CREATE", this.#events, rq.data);
         return rq.data;
     }
 }
