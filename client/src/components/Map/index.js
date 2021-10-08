@@ -7,16 +7,6 @@ import styles from "./index.module.scss";
 import marker from "../../assets/location_marker.svg";
 import "./MapControls.scss";
 
-/**
- *
- * @param {*} props
- * @param props.center - initial position
- * @param props.zoom - initial zoom
- * @param props.onCenterChange - function called on each map move
- * @param props.width - map width
- * @param props.height - map height
- * @param props.blockInteraction - whether interacting with this map should be possible
- */
 export const Map = (props) => {
     const mapRef = useRef(null);
 
