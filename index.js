@@ -20,8 +20,8 @@ const MongoStore = require("connect-mongo");
 // Passport middleware
 mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true })
-    .then(console.log(`MongoDB connected ${process.env.MONGO_URI}`))
-    .catch((err) => console.log(err));
+    .then((`MongoDB connected ${process.env.MONGO_URI}`))
+    .catch((err) => (err));
 
 // Bodyparser middleware, extended false does not allow nested payloads
 app.use(express.json());
@@ -91,7 +91,7 @@ app.post("/api/deleteEvent", async (req, res) => {
 app.post("/api/getUserEvents", async (req, res) => {
     try {
         const userEvents = await events.find({ user: req.body.email });
-        console.log(userEvents);
+        (userEvents);
         res.status(200).json(userEvents);
     } catch (err) {
         res.status(400).json({ msg: err });
@@ -120,7 +120,7 @@ app.post("/api/createEvent", (req, res) => {
     try {
         const id = await events.findOne({_id:req.body.id});
         if (!id) throw Error("something went wrong");
-        console.log(event);
+        (event);
         res.status(200).json(id);
     } catch (err) {
         res.status(400).json({ msg: err });
@@ -131,5 +131,5 @@ app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    (`Example app listening at http://localhost:${port}`);
 });
