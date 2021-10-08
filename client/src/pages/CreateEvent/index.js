@@ -80,8 +80,8 @@ export const CreateEvent = () => {
                         <option value={3}>Happening/meeting</option>
                         <option value={4}>Inne</option>
                     </select>
-                    <input onChange={formik.handleChange} type="text" id="name" placeholder=" Nazwa wydarzenia" />
-                    <textarea onChange={formik.handleChange} type="textarea" id="description" placeholder=" Opis wydarzenia" />
+                    <input onChange={formik.handleChange} maxlength="40" type="text" max id="name" placeholder=" Nazwa wydarzenia" />
+                    <textarea onChange={formik.handleChange} maxlength="1000" type="textarea" id="description" placeholder=" Opis wydarzenia" />
                     <Stack gap={2} direction="horizontal">
                         <p style={{ width: "70%", margin: 0 }}>{locationText}</p>
                         {locationText !== "Brak lokalizacji" && (
