@@ -3,20 +3,19 @@
 .link {
     text-decoration: none;
     color: black !important;
-    animation: animate-in 0.3s ease;
 }
 .createdSpan {
     text-align: right;
     font-size: 0.8em;
 }
-.trash{
+.trash {
     text-align: center;
     font-size: 1.6em;
-    background-color:$red;
-    color:white;
-    width:80px;
-    border-radius:10px;
-    cursor:pointer;
+    background-color: $red;
+    color: white;
+    width: 80px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 .item {
     text-align: left;
@@ -54,14 +53,4 @@
     padding: 5px;
     max-height: 30px;
     border-radius: 7px;
-}
-@keyframes animate-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0px);
-    }
 }
