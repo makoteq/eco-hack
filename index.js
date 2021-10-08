@@ -34,7 +34,7 @@ app.use(
         resave: true,
         saveUninitialized: true,
         cookie: {
-            maxAge: 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000,
         },
         store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     })
@@ -80,29 +80,28 @@ app.get("/api/getEvents", async (req, res) => {
 });
 app.post("/api/deleteEvent", async (req, res) => {
     try {
-        const event = await events.deleteOne({_id: req.body.id});
+        const event = await events.deleteOne({ _id: req.body.id });
         if (!event) throw Error("something went wrong");
         res.status(200).json("ok");
     } catch (err) {
         res.status(400).json({ msg: err });
-        
     }
 });
 
 app.post("/api/getUserEvents", async (req, res) => {
-        try {
-            const userEvents = await events.find({user:req.body.email});
-            console.log(userEvents)
-            res.status(200).json(userEvents);
-        } catch (err) {
-            res.status(400).json({ msg: err });
-        }
+    try {
+        const userEvents = await events.find({ user: req.body.email });
+        console.log(userEvents);
+        res.status(200).json(userEvents);
+    } catch (err) {
+        res.status(400).json({ msg: err });
+    }
 });
 
 app.post("/api/createEvent", (req, res) => {
     let data = {
         name: req.body.name,
-        user:req.body.user,
+        user: req.body.user,
         type: req.body.type,
         description: req.body.description,
         address: req.body.address,

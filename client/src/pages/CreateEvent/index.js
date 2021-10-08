@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import { BIcon } from "../../components/BIcon";
 import { useHistory } from "react-router";
-import { API_CLIENT, LOGIN_MANAGER } from "../../constants";
+import { API_CLIENT } from "../../constants";
 import { container } from "../../global.module.scss";
 import styles from "./index.module.scss";
 import { spawnPopup } from "../../utils/popups/spawnPopup";
@@ -12,10 +12,12 @@ import { spawnError } from "../../utils/popups/spawnError";
 import { getPlace } from "../../utils/map/getPlace";
 import { MapPopup } from "./MapPopup";
 import { addEvent } from "../../context/Events";
+import { useLogin } from "../../context/Login";
 
 export const CreateEvent = () => {
+    const login = useLogin();
     const history = useHistory();
-    if (LOGIN_MANAGER.state === null) {
+    if (login === null) {
         history.push("/");
     }
     useTitle("Tworzenie wydarzenia");
@@ -54,7 +56,7 @@ export const CreateEvent = () => {
                 lat: mapPos?.[1] ?? null,
                 address: locationText,
                 time: date.getTime(),
-                user: LOGIN_MANAGER.state.email,
+                user: login.email,
             };
             API_CLIENT.createEvent(rqObj)
                 .then((res) => {

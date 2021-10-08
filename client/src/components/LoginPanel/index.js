@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { LOGIN_MANAGER } from "../../constants";
 import { spawnError } from "../../utils/popups/spawnError";
 import { BIcon } from "../BIcon";
+import { updateLogin } from "../../context/Login";
 
 export const LoginPanel = (props) => {
     const form = useRef(null);
@@ -13,7 +14,7 @@ export const LoginPanel = (props) => {
             e.preventDefault();
             LOGIN_MANAGER.login({ email: e.srcElement[0].value, password: e.srcElement[1].value })
                 .then((r) => {
-                    console.log(r);
+                    updateLogin(r);
                     props.close(r);
                 })
                 .catch((e) => {
